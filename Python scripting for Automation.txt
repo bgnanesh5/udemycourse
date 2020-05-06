@@ -1,0 +1,1394 @@
+1. Python Scripting for Automation:
+===================================
+What is python?
+---------------
+- Python is a powerful multi-purpose programming language created by Guido van Rossum.
+why python is popular?
+-----------------------
+- Python is easy to learn because of its simple syntaxes.
+- Many modules(pre-defined and third party).
+- Code length is very short becuase of third party modules.
+- Platform independent.
+
+[root@ip-172-31-43-247 ~]# python
+Python 3.6.8 (default, Apr  3 2019, 17:26:03)
+[GCC 8.2.1 20180905 (Red Hat 8.2.1-3)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+
+>>> import platform
+>>> platform.platform()
+'Linux-4.18.0-80.4.2.el8_0.x86_64-x86_64-with-redhat-8.0-Ootpa'
+>>> platform.system()
+'Linux'
+
+- Supports both functional and OOPS concepts.
+
+Application areas of Python:
+----------------------------
+- Web-Application Development		- flask or Django
+- API Development			- flask or Django
+- Desktop GUI Application Development   - toolkit interface
+- Data Analysis
+- AI(Artificial Intelligence)
+- Web Scraping & Text Processing
+- Selenium Testing with Python
+- Automation
+
+Python Version:
+---------------
+- There are two types of python versions.
+- Theay are:
+   - 2.x
+   - 3.x
+
+- we will go with python 3.x.
+
+2. Installing python on Windows:
+================================
+- python-3.7.4
+- Goto www.python.org
+
+3. Installing python on Linux:
+==============================
+
+https://www.python.org/downloads/source/
+https://www.python.org/ftp/python/3.7.7/Python-3.7.7.tgz
+
+[root@ip-172-31-45-131 opt]# wget https://www.python.org/ftp/python/3.7.7/Python-3.7.7.tgz
+
+- check for wget if not then install using yum install wget
+- Download required package usinf wget <url>
+- Yum install gcc openssl-devel bzip2-devel libffi-devel
+- Navigate to extracted file and then follow below steps
+	--> ./configure
+		(./configure --enable-optimizations
+		 ./configure --prefix=/opt
+		 The default installation location is: /usr/local/bin)
+	- make
+	- make altinstall (Generally we have to use make install but already if you have
+- create a soft-links and then verify installation by running
+	python3 --version
+	pip3 --version
+
+[root@ip-172-31-45-131 ~]# history
+    1  wget --version
+    2  cd /opt/
+    3  wget https://www.python.org/ftp/python/3.7.7/Python-3.7.7.tgz
+    4  ll
+    5  tar -xvzf Python-3.7.7.tgz
+    6  ll
+    7  yum install gcc openssl-devel bzip2-devel libffi-devel
+    8  cd  Python-3.7.7
+    9  ll
+   10  ./configure
+   11  ./configure --enable-optimizations
+   12  make
+   13  make altinstall
+   14  ls -ltr /usr/local/bin/
+   15  cd /usr/local/bin/
+   16  ./ python3.7 -V
+   17  ./python3.7 -V
+   18  ln -s python3.7 python3
+   19  python3 --version
+   20  ln -s pip3.7 pip3
+   21  pip3 --version
+   22  cd
+   23  python3 --version
+   24  pip3 -V
+
+
+4. Code Editors for Python:
+===========================
+Code Editors:
+-------------
+IDLE  - Integrated Development Environment
+vi/vim
+	https://www.vim.org/download.php#pc
+	C:\Program Files (x86)\Vim
+Notepad/Notepad++
+PyCharm
+Spyder
+PyDev
+Atom
+Sublime Text .....
+
+
+5. Simple Hello World! python script using vim and default IDLE:
+================================================================
+C:\Users\Administrator\Desktop\pythonscripts>type hello_world.py
+print("Hello World!")
+
+C:\Users\Administrator\Desktop\pythonscripts>python hello_world.py
+Hello World!
+
+6. Indentation in Python:
+=========================
+Indentation:
+-----------
+- Indent --> space
+- Indentatioms are used to represent a block of code.
+- The amount of indentation is up to you, but it must be consistent throughout taht block.
+- Don't include an indent unnecessarily.
+
+
+C:\Users\Administrator>type indentation_usage.py
+print("This is about indentation")
+if 3 > 1:
+    print("using if condition")
+    print("we are comparing 3 and 1")
+
+
+C:\Users\Administrator>vim indentation_usage.py
+
+C:\Users\Administrator>python indentation_usage.py
+This is about indentation
+using if condition
+we are comparing 3 and 1
+
+
+7. Comments of Python:
+=======================
+
+
+
+#This is a simple arithmetic calculator
+#Autor: Mahesh
+#Date: Apr-2020
+#Version: v.1.0
+
+a=4
+b=5
+result=a+b
+print(f"The additon of {a} and {b} is: {result}")
+
+
+
+C:\Users\Administrator\Desktop\pythonscripts>type usage_of_comments.py
+'''
+This is a simple arithmetic calculator
+Autor: Mahesh
+Date: Apr-2020
+Version: v.1.0
+'''
+
+a=4
+b=5
+result=a+b
+print(f"The additon of {a} and {b} is: {result}")
+
+C:\Users\Administrator\Desktop\pythonscripts>python usage_of_comments.py
+The additon of 4 and 5 is: 9
+
+
+8. Special characters of Python:
+==================================
+Special Chars:
+--------------
+- Write special chars only insdie of quote --> '',"
+- \n --> new line
+- \b --> back space
+- \t --> tab
+- \  --> Escape symbol
+- \\ --> For windows we have to give \\ - C:\\Users\\Administrator\\Desktop\\pythonscripts
+- \a --> alert sound
+C:\Users\Administrator\Desktop\pythonscripts>type special_char.py
+#print("welcome to python scripting")
+#print("we are working with some special characters")
+print("welcome to python scripting. \nwe are working with special chars")
+
+C:\Users\Administrator\Desktop\pythonscripts>python special_char.py
+welcome to python scripting.
+we are working with special chars
+
+C:\Users\Administrator\Desktop\pythonscripts>python
+Python 3.7.7 (tags/v3.7.7:d7c567b08f, Mar 10 2020, 10:41:24) [MSC v.1900 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>> print("Hello World")
+Hello World
+>>> print("Hello \bWorld")
+HelloWorld
+>>> print("Hello \nWorld")
+Hello
+World
+>>> print("Hello \tWorld")
+Hello   World
+>>> print('python\'s calss')
+python's calss
+
+
+9. Running python script on Windows and Linux OS's:
+====================================================
+
+- python script_name
+
+Linux like systems:
+-------------------
+which python3
+
+vi hello.py
+#!/usr/local/bin/python3  #--> shebank line
+print('hello')
+
+chmod +x hello.py
+./hello.py
+
+
+10. Working with variable
+=========================
+- What is variable
+- How to declare variable and use
+- Display a variable value using print
+- Re-declare variable
+- Delete a variable
+- Rules to define a variable
+
+
+variable:
+--------
+- A variable is nothing but a reserved memory location to store values.
+In other words a variable in a program gives data to the computer on work on.
+
+How to declare and use a variable
+--------------------------------
+ - No need to declare varibales before using them
+     a=10
+     print(a)
+Note: Don't write uo
+
+>>> x=4
+>>> print(x)
+4
+
+Re-declare a variable?
+----------------------
+
+ x=10
+ print(x)
+ x=15
+ print(x)
+
+Delete a variable? (it runs on RAM memory)
+------------------
+
+ x=10
+ print(x)
+ del x
+
+Rules to define a variable names?
+----------------------------------
+
+- It contains letters, numbers and underscore.
+- It should not a keyword
+- can't contain spaces.
+- It should not start with a number
+- Case-sensitive
+
+java_version=
+Install_pkg="java"
+
+
+
+11. Data types or variable data types in python:
+=================================================
+
+>>> x=5
+>>> print(id(x))
+140728779635904		-	 Memory Location
+
+Data types in python:
+---------------------
+- Every value in python has a data type.
+- since everything is an object in python programming, data types are actually calsses 
+  and varibale are instance (object) of these classes.
+- There are various data types in python.
+Basic Data Types are:
+---------------------
+- Numbers(int,float,complex)
+- Strings
+- Boolean
+
+
+x=3
+y=4.5
+z=3+5j
+print(x,type(x))
+print(y,type(y))
+print(z,type(z))
+
+= RESTART: C:/Users/Administrator/Desktop/pythonscripts/working_with_data_types.py
+3 <class 'int'>
+4.5 <class 'float'>
+(3+5j) <class 'complex'>
+
+
+'''
+lan_name="python scripting"
+print(lan_name)
+
+'''
+my_value=True
+my_new_value=False
+print(my_value,type(my_value))
+
+= RESTART: C:/Users/Administrator/Desktop/pythonscripts/working_with_data_types.py
+>>> 
+= RESTART: C:/Users/Administrator/Desktop/pythonscripts/working_with_data_types.py
+>>> 
+= RESTART: C:/Users/Administrator/Desktop/pythonscripts/working_with_data_types.py
+True <class 'bool'>
+
+
+- Typecasting or type conversion:
+---------------------------------
+Converting one data type to another
+
+x=56
+print(x,type(x))
+y=str(x)
+print(y, type(y))
+
+= RESTART: C:/Users/Administrator/Desktop/pythonscripts/working_with_data_types.py
+56 <class 'int'>
+56 <class 'str'>
+
+
+int, float, complex
+str
+bool
+
+note: Any data type can be converted into boolean
+      bool(any_data_type)=True or False
+      ---------------------------------
+      bool(empty)=False
+      bool(non-empty)=True
+
+>>> bool(0)
+False
+>>> bool(x)
+True
+>>> bool(None)
+False
+>>> bool(None)
+False
+---------------------------
+- Any data type can be converted inot a string but reverse is not always true.
+
+
+12. print with variable(s) and string(s):
+==========================================
+
+
+'''
+x=3;y=5.7;lan_name="python scripting"
+'''
+
+x=3
+y=5.7
+lan_name="python scripting"
+print("{} {} {}".format(x,y,lan_name))
+print("{} \n{} \n{}".format(x,y,lan_name))
+print(f"{x}{y}{lan_name}")
+
+my_req_output=f"x value: {x} \ny value is: {y} \nlan_name is: {lan_name}"
+print(my_req_output)
+
+
+o/p
+----
+
+= RESTART: C:/Users/Administrator/Desktop/pythonscripts/multiple_variables_in_print.py
+3 5.7 python scripting
+3 
+5.7 
+python scripting
+35.7python scripting
+x value: 3 
+y value is: 5.7 
+lan_name is: python scripting
+
+
+13. Input and output statement of python and usage of eval function:
+====================================================================
+
+
+[ec2-user@ip-172-31-45-131 pythonscripts]$ cat input_output.py
+#simple arithmetic calculator
+a=5
+b=6
+result=a+b
+print(f"the addition of {a} and {b} is: {result}")
+[ec2-user@ip-172-31-45-131 pythonscripts]$ python3 input_output.py
+the addition of 5 and 6 is: 11
+
+
+[ec2-user@ip-172-31-45-131 pythonscripts]$ cat input_output.py
+#simple arithmetic calculator
+a=input("Enter a value:")
+b=input("Enter b value:")
+result=a+b
+#print(f"the addition of {a} and {b} is: {result}")
+print(f"The value of a is: {a} and type is: {type(a)}")
+[ec2-user@ip-172-31-45-131 pythonscripts]$ python3 input_output.py
+Enter a value:55
+Enter b value:66
+The value of a is: 55 and type is: <class 'str'>
+
+>>> x=int(input("enter x:" ))
+enter x:54
+>>> type(x)
+<class 'int'>
+
+>>> x=eval(input("enter x:"))
+enter x:4.5
+>>> type(x)
+<class 'float'>
+
+>>> x=eval(input("enter x:"))
+enter x:"hi"
+>>> type(x)
+<class 'str'>
+
+
+14. Python script and module:
+=============================
+- Module is called pre-defined python script
+	re-usability of script
+
+1. name="Windows-10"
+
+
+2. import my_os
+
+   print(my_os.name)
+
+Module: pre defined python script.
+
+- pre-defined modules
+- Third-party modules
+---------------------
+
+import platform
+print(platform.system())
+
+import platform
+print(platform.system())
+
+import datetime
+print(datetime.datetime.today())
+time.sleep(4)
+
+import paramiko  ------> it is third party module, we have to install uning pip
+
+C:\Users\Administrator>pip install paramiko
+
+
+15. Working with Python Strings:
+================================
+What is string in python?
+-------------------------
+- A string is a sequence of characters.
+- A character is simply a symbol. For example, the English language has 26 characters.
+- Computers do not deal with characters, they deal with numbers(binary). Even though you may see characters on your screen,
+  internally it is stored and manipulated as a combination of 0's and 1's.
+- This conversion of character to a number is called encoding, and the reverse process is decoding.
+  ASCII and Unicode are some of the popular encoding used.
+- In python, string is a squence of Unicode character. Unicode was introdued to include every character in all languages
+  and bring uniformity in encoding.
+
+How to create a string in python?
+---------------------------------
+my_name="Mahesh"
+my_new_name="python developer"
+my_info="I started my carriet as an devops"
+print(f"my name is: {my_name} \nmy new name is: {my_new_name}  \nmy information is : {my_info}")
+
+my name is: Mahesh 
+my new name is: python developer  
+my information is : I started my carriet as an devops
+
+How to access characters in a string?
+-------------------------------------
+my_str=""
+my_new_str=" "
+print(f"(bool(my_new_str))"
+
+
+my_fav_scripting="python"
+print(f'{my_fav_scripting}')
+print(my_fav_scripting)
+print(my_fav_scripting[2])
+print(my_fav_scripting[-3])
+print(my_fav_scripting[0:4])
+
+str_0_4=my_fav_scripting[0:5]
+print(str_0_4)
+
+
+How to change or delete a string?
+----------------------------------
+
+- strings are immutable. This means thtat elements of a string cannot be changed once it has been assigned.
+  We can simply reassign different strings to the same name.
+
+How to find length of a string?
+-------------------------------
+
+my_fav_scripting="python scripting"
+
+my_str_len=len(my_fav_scripting)
+
+print(f"the length of string is: {my_str_len}")
+
+the length of string is: 16
+
+
+
+my_fav_scripting="python scripting"
+
+my_str_len=len(my_fav_scripting)
+
+print(f"the length of string is: {my_str_len}")
+print(my_fav_scripting[-16:-5])
+print(my_fav_scripting[4:13])
+
+o/p:
+----
+the length of string is: 16
+python scri
+on script
+
+How to add/Concatenate two strings?
+------------------------------------
+
+my_str1="python"
+my_str2="scripting"
+my_str3=my_str1+" "+ my_str2
+print(f"my concatinated string is: {my_str3}")
+
+
+o/p:
+----
+my concatinated string is: python scripting
+
+
+16. Case Conversion operations on strings:
+==========================================
+
+my_string="Python Scripting"
+print(my_string)
+print(my_string.lower())
+print(my_string.upper())
+print(my_string.swapcase())
+print(my_string.title())
+print(my_string.capitalize())
+print(my_string.casefold())
+
+o/p:
+----
+Python Scripting
+python scripting
+PYTHON SCRIPTING
+pYTHON sCRIPTING
+Python Scripting
+Python scripting
+python scripting
+
+
+17. Practice with string operations:
+====================================
+Display given string at right/left/center of a line in title format:
+====================================================================
+
+C:\Users\Administrator\Desktop\pythonscripts>mode
+
+Status for device COM1:
+-----------------------
+    Baud:            1200
+    Parity:          None
+    Data Bits:       7
+    Stop Bits:       1
+    Timeout:         OFF
+    XON/XOFF:        OFF
+    CTS handshaking: OFF
+    DSR handshaking: OFF
+    DSR sensitivity: OFF
+    DTR circuit:     ON
+    RTS circuit:     ON
+
+
+Status for device CON:
+----------------------
+    Lines:          9001
+    Columns:        120
+    Keyboard rate:  31
+    Keyboard delay: 1
+    Code page:      437
+
+ 
+
+C:\Users\Administrator\Desktop\pythonscripts>type align_text.py
+given_str=input("Enter your string: ")
+print(given_str.center(120))
+print(given_str.ljust(120))
+print(given_str.rjust(120))
+C:\Users\Administrator\Desktop\pythonscripts>python align_text.py
+Enter your string: python string
+                                                     python string                                                      
+python string                                                                                                           
+                                                                                                           python string
+
+
+>>> import os
+
+>>> os.get_terminal_size()
+os.terminal_size(columns=120, lines=30)
+>>> os.get_terminal_size().columns
+120
+
+
+
+linux
+-----
+[ec2-user@ip-172-31-45-131 pythonscripts]$ tput cols
+137
+
+C:\Users\Administrator\Desktop\pythonscripts>type align_text.py
+import os
+t_w=os.get_terminal_size().columns
+given_str=input("Enter your string: ")
+print(given_str.center(t_w))
+print(given_str.ljust(t_w))
+print(given_str.rjust(t_w))
+
+C:\Users\Administrator\Desktop\pythonscripts>python align_text.py
+Enter your string: python scripting
+                                                    python scripting                                                    
+python scripting                                                                                                        
+                                                                    
+C:\Users\Administrator\Desktop\pythonscripts>type align_text.py
+import os
+t_w=os.get_terminal_size().columns
+given_str=input("Enter your string: ")
+print(given_str.center(t_w).title())
+print(given_str.ljust(t_w).title())
+print(given_str.rjust(t_w).title())
+
+C:\Users\Administrator\Desktop\pythonscripts>python align_text.py
+Enter your string: python scripting
+                                                    Python Scripting                                                    
+Python Scripting                                                                                                        
+
+
+
+18. Practice:
+============
+read a directory path and identify all files and directory:
+==========================================================
+
+C:\\Users\\Administrator\\Desktop\\New folder
+
+C:\Users\Administrator\Desktop\pythonscripts>type read_a_path_and_identify_file_and_dir.py
+'''
+import os
+import sys
+
+path=input("Enter your directory path: ")
+
+if os.path.exists(path):
+        dirfile_list=os.listdir(path)
+else:
+        print("please provide valid path")
+        sys.exit()
+
+print(dirfile_list)
+
+p1=os.path.join(path,dirfile_list[0])
+p2=os.path.join(path,dirfile_list[1])
+
+#print(p2)
+
+
+if os.path.isfile(p2):
+        print(f"{p2} is a file")
+else:
+        print(f"{p2} is a directory")
+
+if os.path.isfile(p1):
+        print(f"{p1} is a file")
+else:
+        print(f"{p1} is a directory")
+'''
+'''
+print('before loop')
+
+for each in [2,6,4]:
+        print("ok",each)
+
+print('after loop')
+
+'''
+
+
+
+
+import os
+import sys
+
+path=input("Enter your directory path: ")
+
+if os.path.exists(path):
+        dirfile_list=os.listdir(path)
+else:
+        print("please provide valid path")
+        sys.exit()
+
+list_of_files_dir=os.listdir(path)
+print('all list of fiels and dirs: ',list_of_files_dir)
+
+for each_file_or_dir in list_of_files_dir:
+        f_d_path=os.path.join(path,each_file_or_dir)
+        if os.path.isfile(f_d_path):
+                print(f"{f_d_path} is a file")
+        else:
+                print(f"{f_d_path} is a directory")
+
+C:\Users\Administrator\Desktop\pythonscripts>python read_a_path_and_identify_file_and_dir.py
+Enter your directory path: C:\\Users\\Administrator\\Desktop\\New folder
+all list of fiels and dirs:  ['mydir', 'New Text Document.txt', 'x.txt', 'y.py', 'z.sh']
+C:\\Users\\Administrator\\Desktop\\New folder\mydir is a directory
+C:\\Users\\Administrator\\Desktop\\New folder\New Text Document.txt is a file
+C:\\Users\\Administrator\\Desktop\\New folder\x.txt is a file
+C:\\Users\\Administrator\\Desktop\\New folder\y.py is a file
+C:\\Users\\Administrator\\Desktop\\New folder\z.sh is a file
+
+
+19. Find all files in a directory with extension .py/.sh/.log/.txt etc....:
+============================================================================
+import os
+req_path=input("Enter your directory path: ")
+#req_extension=input("Enter the required files extension .py/.sh/.log/.txt: ")
+if os.path.isfile(req_path):
+  print(f"the given path {req_path} is a file. Please pass only directory path")
+else:
+  all_f_ds=os.listdir(req_path)
+  if len(all_f_ds)==0:
+    print(f"The given path is {req_path} an empty path")
+  else:
+    req_ex=input("Enter the required files extension .py/.sh/.log/.txt: ")
+    req_files=[]
+    for each_f in all_f_ds:
+      if each_f.endswith(req_ex):
+        req_files.append(each_f)
+    if len(req_files)==0:
+       print(f"there are no {req_ex} files in the location of {req_path}")
+    else:
+       print(f"There are {len(req_files)} files in the location of {req_path} with an extention of {req_ex}")
+       print(f"The files are: {req_files}")
+
+
+o/p:
+----
+
+C:\Users\Administrator\Desktop\pythonscripts>python get_requ_extension_files.py
+Enter your directory path: C:\\Users\\Administrator\\Desktop\\New folder
+Enter the required files extension .py/.sh/.log/.txt: .py
+There are 1 files in the location of C:\\Users\\Administrator\\Desktop\\New folder with an extention of .py
+The files are: ['y.py']
+
+
+
+20. Find all the files which are are older than x days:
+=======================================================
+
+import os
+import sys
+import datetime
+
+req_path=input("Enter your path: ")
+age=1
+if not os.path.exists(req_path):
+	print("please provide valid path:")
+	sys.exit(1)
+if os.path.isfile(req_path):
+	print("please provide directory path: ")
+	sys.exit(2)
+
+today=datetime.datetime.now()
+for each_file in os.listdir(req_path):
+	each_file_path=os.path.join(req_path,each_file)
+	if os.path.isfile(each_file_path):
+		file_cre_date=datetime.datetime.fromtimestamp(os.path.getctime(each_file_path))
+		dif_days=(today-file_cre_date).days
+		if dif_days > age:
+			print(each_file_path,dif_days)
+
+o/p:
+----
+C:\Users\Administrator\Desktop\pythonscripts>python delete_older_than_x_days.py
+Enter your path: C:\\Users\\Administrator\\Desktop\\New folder
+C:\\Users\\Administrator\\Desktop\\New folder\New Text Document.txt 4:39:02.459578
+C:\\Users\\Administrator\\Desktop\\New folder\x.txt 3:58:36.584164
+C:\\Users\\Administrator\\Desktop\\New folder\y.py 3:58:36.584164
+C:\\Users\\Administrator\\Desktop\\New folder\z.sh 3:58:36.568540
+
+
+
+21. OS.WALK(path)
+=================
+used to generate directory and file names in a directory tree by walking:
+-------------------------------------------------------------------------
+Note: First complete for loop then start this os.walk:
+------------------------------------------------------
+we will get tupples
+
+find path -name *.txt
+
+/home/xyz
+/home/xyz/dir1
+
+
+
+import os
+path="C:\\Users\\Administrator\\Desktop\\New folder"
+
+#print(list(os.walk(path)))
+
+print("------------------------")
+
+#for each in list(os.walk(path)):
+#	print(each)
+
+for r,d,f in os.walk(path):
+	if len(f) !=0:
+		print(r)
+		for each_file in f:
+			print(os.path.join(r,each_file))
+
+#for r,d,f in list(os.walk(path,topdown=False)):
+#	print(r,d,f)
+
+o/p:
+---
+
+C:\Users\Administrator\Desktop\New folder
+C:\Users\Administrator\Desktop\New folder\New Text Document.txt
+C:\Users\Administrator\Desktop\New folder\x.txt
+C:\Users\Administrator\Desktop\New folder\y.py
+C:\Users\Administrator\Desktop\New folder\z.sh
+C:\Users\Administrator\Desktop\New folder\mydir
+C:\Users\Administrator\Desktop\New folder\mydir\t1.txt
+
+
+22. How to copy a file into another file using python?:
+========================================================
+(copy the contents of a file to another file):
+----------------------------------------------
+
+sfile="C:\\Users\\Administrator\\Desktop\\New folder\\x.txt"
+dfile="C:\\Users\\Administrator\\Desktop\\New folder\\newrandom.txt"
+#sfile=input("Enter the source file: ")
+#9dfile=input("Enter the destinaiton file: ")
+
+sfo=open(sfile,'r')
+content=sfo.read()
+sfo.close()
+
+dfo=open(dfile,'w')
+dfo.write(content)
+dfo.close()
+
+
+23. Working with csv files using python:
+========================================
+First of all,what is CSV?
+-------------------------
+- CSV --> Comma Separated Values
+- It is a simple file format used to store tabular data, such as a spreadsheet/excel or database.
+
+
+import csv
+req_file="C:\\Users\\Administrator\\Desktop\\New folder\\info.csv"
+
+fo=open(req_file,"r")
+#content=fo.readlines()
+csv_read=csv.reader(fo,delimiter=",")
+
+for each in csv_read:
+	print(each)
+
+fo.close()
+
+
+o/p:
+---
+
+['s_no', 'Name', 'Salary', 'Skill']
+['1', 'John', '2000', 'python']
+['2', 'lokesh', '5000', 'bash']
+
+
+24. Introduction to Functions:
+==============================
+
+Function:
+----------
+- A function is a block of code for some specific operation.
+- Function code is re-usable.
+- A function executes only when it is called.
+
+import os
+import time
+import platform
+def mycode(cmd1,cmd2):
+	print("please wait. clearing the screen...")
+	time.sleep(2)
+	os.system(cmd1)
+	print("please wait finding the list of dir and files")
+	time.sleep(2)
+	os.system(cmd2)
+
+if platform.system()=="Windows":
+	mycode("cls","dir")
+else:
+	mycode("clear","ls -ltr")
+
+
+25. How to change current working directory in python?:
+=======================================================
+
+>>> import os
+>>> os.getcwd()
+'/home/ec2-user/pythonscripts'
+>>> os.chdir("/etc")
+>>> os.getcwd()
+'/etc'
+>>> exit()
+
+
+import os
+'''
+req_path=input("Enter path to change working dir: ")
+print("The current working dir is: ",os.getcwd())
+try:
+	os.chdir(req_path)
+	print("Now your new working dir is: ",os.getcwd())
+except FileNotFoundError:
+	print("Given path is not a valid path. So cannot change working directory")
+except NotADirectoryError:
+	print("Given path is not a valid path. So cannot change working directory")
+except PermissionError:
+	print("Sorry you donot have access for the given path. So cannot change working directory")
+except Exception as e:
+	print(e)
+'''
+def main():
+	req_path=input("Enter path to change working dir: ")
+	print("The current working dir is: ",os.getcwd())
+	try:
+		os.chdir(req_path)
+		print("Now your new working dir is: ",os.getcwd())
+	except FileNotFoundError:
+			print("Given path is not a valid path. So cannot change working directory")
+	except NotADirectoryError:
+			print("Given path is not a valid path. So cannot change working directory")
+	except PermissionError:
+			print("Sorry you donot have access for the given path. So cannot change working directory")
+	except Exception as e:
+			print(e)
+	return None
+
+if __name__=="__main__":
+	main()
+
+
+
+26. Python Regular expressions (re module)(Introduction):
+=========================================================
+What is Regular Expression(RegEX):
+-----------------------------------
+- The regex is a procedure in any language to look for a specified pattern in a given text.
+- What is pattern?
+	It is a sequence of characters, whcih represent multiple strings
+	Ex: 'i[st]' --> is,it
+	'python[23]' --> python2,python3
+
+>>> my_str="python is simple and it is easy"
+>>> my_str.split("is")
+['python ', ' simple and it ', ' easy']
+>>> import re
+>>> re.split("i[st]",my_str)
+['python ', ' simple and ', ' ', ' easy']
+
+
+Python module for Regular Expressions:re
+----------------------------------------
+- The different operations is python re are:
+    match()
+    search()
+    findall()
+    finditer()
+    sub()
+    split()
+    compile() ..........
+
+
+
+27. Python Regular expressions:
+===============================
+Rules to create a pattern:
+--------------------------
+Regular Expressions(RegEx):
+--------------------------
+- The regex is a procedure in any language to look for a specified pattern in a given text.
+- re is the module to perform regex in python.(use import re in scripts)
+- The different operations is python re are:
+    match(),search(),findall(),finditer(),sub(),split(),compile() ..........
+- Pattern is a sequence of characters, which represent multiple strings.
+- Simple examples for pattern:
+    - "Python"
+    - "Python[12]" -> "Python1" "Python2"
+    - r"Python" or r"Python[23]"
+
+- Learning pattern creation with findall operation:
+=--------------------------------------------------
+
+How to use findall?
+
+import re
+print(re.findall(pattern,text))
+
+
+import re
+
+text="This is a python and it is easy to learn"
+#my_pattern="is"
+my_pattern="i[ts]"
+print(re.findall(my_pattern,text))
+print(len(re.findall(my_pattern,text)))
+#print(re.findall("is","This is a python and it is easy to learn"))
+
+['is', 'is', 'it', 'is']
+4
+
+Rules to create a pattern:
+--------------------------
+- a,x,9 - Ordinary characters that match themselves
+- [abc] - Matches a or b or c
+- [a-zA-Z0-9] - Matches any letter from (a to z)(A to Z)(0 to 9)
+- \w - Matches any single letter, digit or underscore
+- \W - Matches any character not part of \w
+- \d - matches decimal digit 0-9
+- . - Matches any single character except newline character
+
+
+import re
+
+text="This is a python3. and it is easy to learn."
+
+'''
+#my_pattern="is"
+my_pattern="i[ts]"
+print(re.findall(my_pattern,text))
+print(len(re.findall(my_pattern,text)))
+#print(re.findall("is","This is a python and it is easy to learn"))
+'''
+#my_pattern="[abcd]"
+#my_pattern="[a-d]"
+
+#my_pattern="\w"
+#my_pattern="\w\w"
+#my_pattern="\W"
+#my_pattern="\d"
+#my_pattern=".." #except \n
+#my_pattern="\."
+#print(re.findall(my_pattern,text))
+
+ip="this is my ip of a db server: 255.100.102.103"
+pat="\d\d\d\.\d\d\d\.\d\d\d\.\d\d\d"
+print(re.findall(pat,ip))
+
+
+['255.100.102.103']
+
+
+28. Compile operation of re module:
+===================================
+
+
+import re
+my_str="This is about python. Python is easy to learn and we have two major version: python2 and python3"
+
+#my_pat=r'\b[pP]ython\b'
+
+my_pat=r'\bpython[23]?\b'
+
+print(re.search(my_pat,my_str))
+#print(re.findall(my_pat,my_str,flags=re.I))
+#print(re.split(my_pat,my_str))
+
+
+pat_ob=re.compile(my_pat,flags=re.I)
+print(pat_ob)
+print(pat_ob.search(my_str))
+print(pat_ob.findall(my_str))
+
+#re.findall(my_pat,my_str)===> re.compile(my_pat).findall(my_str)
+
+
+o/p:
+----
+<re.Match object; span=(14, 20), match='python'>
+re.compile('\\bpython[23]?\\b', re.IGNORECASE)
+<re.Match object; span=(14, 20), match='python'>
+['python', 'Python', 'python2', 'python3']
+
+
+
+29. Working with remote Linux Server from Linux/Windows using paramiko of python:
+=================================================================================
+Paramiko Module(Used to work with remote servers):
+--------------------------------------------------
+- SSHv2 protocal
+- Paramiko module will create a SSH client and by using this it will connect to remote server and executes commands.
+- We can also transfer files from the remote machine to the local or vice versa using paramiko.
+- Two ways to connect with remote server:
+	- Using username and password
+	- Using username and cryptographic key
+- We can connect Linux/Windows <---> Linux/Windows
+
+
+Local Server		Remote Server
+  windows		  Windows
+  windows                 Linux
+  Linux			  Linux
+  Linux			  Windows
+====================================
+
+(pip install paramiko)
+Local server is: Linux and Remote Server: Linux
+===============================================
+
+linux - 
+--------
+
+import paramiko
+ssh = paramiko.SSHClient()
+ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+#ssh.connect(hostname='13.126.245.27',username='ec2-user',password='paramiko123',port=22)
+
+'''
+Key_filename is:
+
+1. generate keys uing
+	ssh-keygen
+	ssk-copy-id ec2-user@<ip>
+key_filename=<provide complete path of private key - /home/automation/.ssh/id-rsa>
+
+'''
+ssh.connect(hostname='13.126.245.27',username='ec2-user',key_filename='demo_private_key',port=22)
+stdin, stdout, stderr = ssh.exec_commad('free -m')
+
+print("The output is: ")
+print(stdout.reaadlines())
+
+print("The error is: ")
+print(stderr.reaadlines())
+
+windows:
+-------
+
+import paramiko
+ssh = paramiko.SSHClient()
+ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+#ssh.connect(hostname='13.126.245.27',username='ec2-user',password='paramiko123',port=22)
+
+'''
+Key_filename is:
+
+1. generate keys uing
+	ssh-keygen
+	ssk-copy-id ec2-user@<ip>
+key_filename=<provide complete path of private key - /home/automation/.ssh/id-rsa>
+
+'''
+
+ssh.connect(hostname='13.126.245.27',username='ec2-user',key_filename='demo_private_key',port=22)
+stdin, stdout, stderr = ssh.exec_commad('free -m')
+
+print("The output is: ")
+print(stdout.reaadlines())
+
+print("The error is: ")
+print(stderr.reaadlines())
+
+30. Transfer a file from local server to remote server and vice versa using paramiko of python:
+===============================================================================================
+
+import paramiko
+ssh = paramiko.SSHClient()
+ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+ssh.connect(hostname=’13.126.245.27’,username=’ec2-user’,password=’paramiko123’,port=22)
+sftp_client=ssh.open_sftp()
+print(dir(sftp_client))
+
+#sftp_client.get('/home/ec2-user/paramiko_download.txt',"paramiko_downloaded.txt")
+'''
+# Download 
+
+sftp_client.chdir("/home/ec2-user")
+print(sftp_client.getcwd())
+sftp_client.get('demo.txt','c:\\Users\\Automation\\Desktop\\download_file.txt')
+'''
+# Transfer file from local to remote
+
+sftp_client.put("transfer_files.py",'/home/ec2-user/transfer_files.py')
+sftp_client.close()
+ssh.close()
+
+
+
+31. Concept: Introduction OOPS:
+===============================
+What is an OOPs:
+================
+- It is about: Class, Inheritance, Polymorphism, Data Abstraction and Data Encapsulation.
+What is an object:
+------------------
+- Object could be any thing which exists in real-time, like human, fan, car, email, any application,
+  jenkins, weblogic, tomcat, apache etc......
+- Each object has characteristics and functions
+- Person/Human:
+	- Characteristics: Name, Age
+	- Funcations: walking, talking and running
+
+Why OOP's:
+----------
+- To group related functions(methods)
+- To create a template/blueprint
+
+
+import os
+class Tomcat:
+	def get_details_for_each_tomcat(self,server_xml):
+		self.tcf=server_xml
+		self.th=os.path.dirname(os.path.dirname(server_xml))
+		return None
+
+
+	def display_details(self):
+		print(f'The tomcat config file is: {tcf}\nThe tomcat home is: {th}')
+		return None
+
+
+
+def main():
+	tomcat7=Tomcat()
+	tomcat9=Tomcat()
+
+
+	tomcat7.get_details_for_each_tomcat("/home/pythonscript/tomcat7/conf/server.xml")
+	#get_details_for_each_tomcat('tomcat7',"/home/pythonscript/tomcat7/conf/server.xml")
+	tomcat9.get_details_for_each_tomcat("/home/pythonscript/tomcat7/conf/server.xml")
+	#get_details_for_each_tomcat('tomcat9',"/home/pythonscript/tomcat7/conf/server.xml")
+	print(tomcat7.th)
+	print(tomcat9.tcf)
+	print(tomcat7.tcf)
+	print(tomcat9.th)
+	#tomcat9.display_details()
+	#tomcat7.display_details()
+
+
+
+	#tomcat7_cfg="/home/Automation/tomcat7/conf/server.xml"
+	#tomcat9_cfg="/home/Automation/tomcat7/conf/server.xml"
+
+
+	return None
+
+
+
+if __name__=="__main__":
+	main()
+
+o/p:
+====
+/home/pythonscript/tomcat7
+/home/pythonscript/tomcat7/conf/server.xml
+/home/pythonscript/tomcat7/conf/server.xml
+/home/pythonscript/tomcat7
+
+32. Concept: Class and Object Attributes:
+=========================================
+Class:
+------
+- Class is a template/blueprint to create an object.
+- Class is the combination of attributes and methods
+- We can define attributes for class and objects.
+
+
+class emp:
+	def get_name_age_salary(self,name,age,salary):
+		self.name=name
+		self.age=age
+		self.salary=salary
+		self.display_details()
+		return None
+	def display_details(self):
+		print(f'The name is: {self.name}\nThe age is: {self.age}\nThe salaryis: {self.salary}')
+		return None
+
+
+
+emp1=emp()
+emp2=emp()
+
+emp1.get_name_age_salary('john',34,35000)
+emp2.get_name_age_salary('clinton',25,54000)
+'''
+print(dir(emp1))
+print(dir(emp2))
+'''
+print(emp1.age)
+emp1.display_details()
+
+o/p:
+----
+The name is: john
+The age is: 34
+The salaryis: 35000
+The name is: clinton
+The age is: 25
+The salaryis: 54000
+34
+The name is: john
+The age is: 34
+The salaryis: 35000
+[Finished in 0.1s]
+
+
+33. Python shutil module:
+=========================
+- Python Shutil Module provide us a number of high-level operations on files and folders/directories
+  like copy, move, remove and much more.
+
+Note:
+-----
+import shutil
+print(dir(shutil))
+
+Shutil Module part-1:
+--------------------
+Copy file(s) with Shutil Module:
+--------------------------------
+
+import shutil
+
+src="/home/pythonscript/working_with_remote_server.py"
+dest="/home/pythonscript/working_with_remote_server1.py"
+#shutil.copyfile(src,dest)        --> if you no need the same permission file
+shutil.copy(src,dest)  #--> same permission src and dest
+shutil.copy2(src,dest)   # same meta data
+shutil.copymode(src,dest)  # it provides only permission
+shutil.copystat(src,dest)  # only time stamp
+shutil.copyfileobj(src,dest)
+shutil.copytree(src,dest)

@@ -1,0 +1,902 @@
+Pipeline jon to build and deploy docker image:
+==============================================
+1. Install jenkins,docker in CI/CD server
+2. Install Docker in Deployment Server.
+3. Create Jenkins Pipeline Job to build and deploy docker image in Docker(Deployment) Server.
+
+Pre-Requisite:
+--------------
+1. AWS Account
+2. Docker Hub Accont (Public Repository for Docker Images)
+   Create a docket hub account if not available using below link.
+   https://hub.docker.com/signup
+   -----------------------------
+
+Setup CI/CD server with Jenkins and Docker i Ubuntu
+===================================================
+
+- Installation java and jenkins:
+--------------------------------
+
+    1  sudo apt-get update
+    2  java -version
+    3  sudo apt install openjdk-8-jdk
+    4  java -version
+    5  wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+    6  sudo vim /etc/apt/sources.list
+    7  sudo apt-get update
+    8  sudo apt-get install jenkins
+    9  sudo systemctl enable jenkins.service
+   10  sudo ufw allow 8080
+   11  sudo ufw  reload
+   12  sudo ufw status
+   13  sudo ufw allow 80
+   14  sudo ufw allow 443
+   15  sudo ufw allow 8080
+   16  sudo ufw status
+   17  sudo ufw allow 8080
+   18  sudo ufw allow OpenSSH
+   19  sudo ufw enable
+   20  sudo ufw status
+   21  sudo systemctl status jenkins
+   21  sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+
+# Install docker
+   sudo apt install docker.io -y
+
+# Add jenkins user to docker
+   sudo usermod -aG docker jenkins
+
+# Restart Jenkins
+   sudo systemctl restart jenkins
+
+
+Install Docker in Deployment Server
+===================================
+
+# Update package manager
+  sudo apt update
+
+# Install docker
+  sudo apt install docker-io -y
+
+# Add ubuntu user to docker
+  sudo usermod -aG docker jenkins/ubuntu
+
+
+node{
+    
+    def buildNumber = BUILD_NUMBER
+    stage("Git Clone"){
+        
+        git url:'https://github.com/MithunTechnologiesDevOps/java-web-app-docker.git', branch: 'master'
+    }
+    stage("Maven Clean Package"){
+        def mavenHome= tool name: "Maven",type: "maven"
+        
+        sh "${mavenHome}/bin/mvn clean package"
+        
+    }
+    stage("Build Docker Image"){
+        sh "docker build -t mahesh345/java-web-app-docker:${buildNumber} ."
+    }
+    
+    stage("Docker login and push"){
+        withCredentials([string(credentialsId: 'DockerHubPwd', variable: 'DockerHubPwd')]){
+        sh "docker login -u mahesh345 -p ${DockerHubPwd}"
+            
+        }
+        sh "docker push mahesh345/java-web-app-docker:${buildNumber}"
+        
+    }
+    /SSH agent with private key/
+    stage("Deploy Application As Docker Container In Docker Deployment Server"){
+        sshagent(['Docker_Dev_Server_SSH']) {
+            sh "ssh -o StrictHostKeyChecking=no ubuntu@15.206.146.183 docker rm -f javawebappcontainer || true"
+            sh "ssh -o StrictHostKeyChecking=no ubuntu@15.206.146.183 docker run -d -p 8080:8080 --name javawebappcontainer mahesh345/java-web-app-docker:${buildNumber}"
+            
+        }
+    }
+    
+}
+
+   
+
+============================================
+
+node{
+    
+    def buildNumber = BUILD_NUMBER
+    stage("Git Clone"){
+        
+        git url:'https://github.com/MithunTechnologiesDevOps/java-web-app-docker.git', branch: 'master'
+    }
+    stage("Maven Clean Package"){
+        def mavenHome= tool name: "Maven",type: "maven"
+        
+        sh "${mavenHome}/bin/mvn clean package"
+        
+    }
+    stage("Build Docker Image"){
+        sh "docker build -t mahesh345/java-web-app-docker:${buildNumber} ."
+    }
+    
+    stage("Docker login and push"){
+        withCredentials([string(credentialsId: 'DockerHubPwd', variable: 'DockerHubPwd')]){
+        sh "docker login -u mahesh345 -p ${DockerHubPwd}"
+            
+        }
+        sh "docker push mahesh345/java-web-app-docker:${buildNumber}"
+        
+    }
+    
+    stage("Deploy Application As Docker Container In Docker Deployment Server"){
+        sshagent(['Docker_Dev_Server']){
+            sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.42.83 docker rm -f javawebappcontainer || true"
+            sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.42.83 docker run -d -p 8080:8080 --name javawebappcontainer mahesh345/java-web-app-docker:${buildNumber}"
+            
+        }
+    }
+    
+}
+
+===========================================
+
+2. Docker Swarm Setup:
+======================
+
+Prerequisites:
+--------------
+3 - Ubuntu Servers
+	1 - Master
+	2 - Workers
+
+Steps:
+------
+
+1. Install Docker Community Edition in all the 3 Server.
+   And add user(ubunutu) to docker group.
+
+  # Below command works for most of the linux flavours except Redhat Linux
+  sudo curl -fsSL get.docker.com | /bin/bash
+
+  # Add current user to docker group
+  sudo usermod -aG docker ${USER}
+
+2. Open below ports in AWS Security Groups.
+
+  TCP port 2377 for cluster management communications
+  TCP and UDP port 7946 for communication among nodes
+  UDP port 4789 for overlay network traffic.
+ 
+  If you are planning on creating an overlay network with encryption (--opt encrypted), you will also need 
+  to ensure ip protocol 50 (ESP) traffic is allowed.
+
+3. Ensure below command to initiate docker swarm manger in one systems.
+
+  # Initialize docker swarm cluster.
+  docker swarm init
+
+o/p:
+----	Swarm initialized: current node (bfr7vn033l2hcbtxsxf4edvc3) is now a manager.
+
+	To add a worker to this swarm, run the following command:
+
+	    docker swarm join --token SWMTKN-1-2da1kdlskuoewrqtpwkawufull9q2vlt6wdf40qrqo5dqyrfbl-elybtyk95v4oo2bn665xvori1 172.31.45.6:2377
+
+	To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
+
+ 
+  # Get worker tocken
+  docker swarm join-token worker
+
+  # Get manager token to add another node as secondary manager
+  docker swarm join-token manager
+
+4. Add workers machine to cluster
+  
+  # Execute join token(worker token from manager) in all worker machines
+
+ubuntu@ip-172-31-45-6:~$ docker swarm join-token worker
+To add a worker to this swarm, run the following command:
+
+    docker swarm join --token SWMTKN-1-2da1kdlskuoewrqtpwkawufull9q2vlt6wdf40qrqo5dqyrfbl-elybtyk95v4oo2bn665xvori1 172.31.45.6:2377
+
+
+
+5. Display docker cluster nodes in manager machine.
+
+  docker node ls
+
+6. Deploy sample Docker Application in docker swarm cluster.
+
+  docker service create --name webserver --replicas 2 -p 80:80 httpd
+
+swarm:
+======
+ubuntu@ip-172-31-45-6:~$ history
+    1  sudo curl -fsSL get.docker.com | /bin/bash
+    2  sudo usermod -aG docker ${USER}
+    3  exit
+    4  docker info
+    5  docker swarm init
+    6  docker swarm join-token worker
+    7  docker node ls
+    8  docker service create --name webserver --replicas 2 -p 80:80 httpd
+    9  docker service ls
+   10  docker service ps webserver
+
+worker:
+=======
+ubuntu@ip-172-31-41-255:~$ history
+    1  sudo curl -fsSL get.docker.com | /bin/bash
+    2  sudo usermod -aG docker ${USER}
+    3  exit
+    4  docker swarm join --token SWMTKN-1-2da1kdlskuoewrqtpwkawufull9q2vlt6wdf40qrqo5dqyrfbl-elybtyk95v4oo2bn665xvori1 172.31.45.6:2377
+
+
+Jenkins Docker Swarm Integration:
+=================================
+
+1. CI/CD pipeline script to build and deploy single service in docker swarm.
+
+2. CI/CD pipeline script to build and deploy multiple services using docker stack(Compose File) in docker swarm
+
+
+Pre Requisites:
+---------------
+
+1. Docker Swarm Cluster
+
+  
+
+2. Set up CI/CD (Jenkins) Server
+
+=====Install Java, Jenkins, Docker in Ubuntu=========
+
+
+sudo apt-get update
+    2  java -version
+    3  sudo apt install openjdk-8-jdk
+    4  java -version
+    5  wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+    6  sudo vim /etc/apt/sources.list
+	
+	Add the following line to the end of the file.
+	deb https://pkg.jenkins.io/debian-stable binary/
+
+    7  sudo apt-get update
+    8  sudo apt-get install jenkins
+    9  sudo systemctl enable jenkins.service
+   10  sudo ufw allow 8080
+   11  sudo ufw  reload
+   12  sudo ufw status
+   13  sudo ufw allow 80
+   14  sudo ufw allow 443
+   15  sudo ufw allow 8080
+   16  sudo ufw status
+   17  sudo ufw allow 8080
+   18  sudo ufw allow OpenSSH
+   19  sudo ufw enable
+   20  sudo ufw status
+   21  sudo systemctl status jenkins
+   21  sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+
+# Install Docker
+--------
+  sudo curl -fsSL get.docker.com | /bin/bash
+
+# Add jenkins user to docker group
+  sudo usermod -aG docker jenkins
+
+# Restart jenkins to reflect docker permissions
+  sudo systemctl restart jenkins
+
+# Use below command if your want to switch to jenkins user
+  sudo -i -u jenkins
+  sudo su - s /bin/bash jenkins
+
+#plugins used
+  sshAgent
+
+===============
+
+
+
+
+
+
+=====================================
+
+node{
+    stage("Git CheckOut"){
+        git url: 'https://github.com/MithunTechnologiesDevOps/spring-boot-mongo-docker.git',branch: 'master'
+    }
+    
+    stage(" Maven Clean Package"){
+      def mavenHome =  tool name: "Maven", type: "maven"
+      def mavenCMD = "${mavenHome}/bin/mvn"
+      sh "${mavenCMD} clean package"
+    } 
+    
+    stage("Build Dokcer Image") {
+         sh "docker build -t mahesh345/spring-boot-mongo ."
+    }
+    
+    stage("Docker Push"){
+        withCredentials([string(credentialsId: 'Swarn_Hub_Docker', variable: 'Swarn_Hub_Docker')]) {
+            sh "docker login -u mahesh345 -p ${Swarn_Hub_Docker}"
+        }
+        sh "docker push mahesh345/spring-boot-mongo"
+        
+    }
+    
+    // Remove local image in Jenkins Server
+    stage("Remove Local Image"){
+        sh "docker rmi -f mahesh345/spring-boot-mongo"
+    }
+    
+    stage("Deploy to docker swarm cluster"){
+        sshagent(['Docker_Swarm_Manager_Dev']) {
+		    sh 'scp -o StrictHostKeyChecking=no  docker-compose.yml ubuntu@172.31.45.6:'
+		    //sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.45.6 docker stack rm springboot'
+                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.45.6 docker stack deploy --prune --compose-file docker-compose.yml springboot'
+        }
+    }
+}
+
+Docker Swarm:
+===========
+
+node{
+    def buildNumber = BUILD_NUMBER
+    stage("Git clone"){
+        
+        git branch: 'master', url: 'https://github.com/MithunTechnologiesDevOps/java-web-app-docker.git'
+    }
+    
+    stage ("mvn clean package"){
+        def mavenHome = tool name: "Maven", type: "maven"
+        def mavenCMD = "${mavenHome}/bin/mvn"
+        sh "${mavenCMD} clean package"
+    }
+    stage("Build Docker Image"){
+        sh "docker build -t mahesh345/java-web-app-swarm:${buildNumber} ."
+    }
+    stage("Docker login and push"){
+        withCredentials([string(credentialsId: 'Swarn_Hub_Docker', variable: 'Swarn_Hub_Docker')]) {
+            sh "docker login -u mahesh345 -p ${Swarn_Hub_Docker}"
+            
+        }
+        
+        sh "docker push mahesh345/java-web-app-swarm:${buildNumber}"
+    }
+    stage("Deploy Application As Docker Container In Docker Swarm Cluster"){
+        sshagent(['Docker_Swarm_Manager_SSH']) {
+            sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.45.6 docker service rm javawebapp || true"
+            sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.45.6 docker service create -p 8080:8080 --name javawebapp --replicas 2  mahesh345/java-web-app-swarm:${buildNumber}"
+        }
+    }
+    
+}
+
+
+Sprint boot pipeline:
+=====================
+
+node{
+    stage("Git CheckOut"){
+        git url: 'https://github.com/MithunTechnologiesDevOps/spring-boot-mongo-docker.git',branch: 'master'
+    }
+    
+    stage(" Maven Clean Package"){
+      def mavenHome =  tool name: "Maven", type: "maven"
+      def mavenCMD = "${mavenHome}/bin/mvn"
+      sh "${mavenCMD} clean package"
+    } 
+    
+    stage("Build Dokcer Image") {
+         sh "docker build -t mahesh345/spring-boot-mongo ."
+    }
+    
+    stage("Docker Push"){
+        withCredentials([string(credentialsId: 'Swarn_Hub_Docker', variable: 'Swarn_Hub_Docker')]) {
+            sh "docker login -u mahesh345 -p ${Swarn_Hub_Docker}"
+        }
+        sh "docker push mahesh345/spring-boot-mongo"
+        
+    }
+    
+    // Remove local image in Jenkins Server
+    stage("Remove Local Image"){
+        sh "docker rmi -f mahesh345/spring-boot-mongo"
+    }
+    
+    stage("Deploy to docker swarm cluster"){
+        sshagent(['Docker_Swarm_Manager_SSH']) {
+		    sh 'scp -o StrictHostKeyChecking=no  docker-compose.yml ubuntu@172.31.45.6:'
+		    //sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.45.6 docker stack rm springboot'
+                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.45.6 docker stack deploy --prune --compose-file docker-compose.yml springboot'
+        }
+    }
+}
+
+==============================
+
+
+4. Kubernetes setup using Kubeadm In AWS Ubuntu servers:
+========================================================
+Pre-requisites:
+---------------
+3 - Ubuntu Servers
+1 - Manager (4GB RAM, 2 Core) t2.medium
+2 - Workers (1GB, 1core)      t2.micro
+
+Note: Open Required Ports In AWS Security Groups. For now we will open All traffic.
+
+control node ports:
+-------------------
+
+TCP  -  6443	-   Kubernetes API server	all
+TCP  -2379-2380 -   etcd sever client API     	kube-apiserver,etcd
+TCP  -  10250   -   kubelet API			self,Control plane
+TCP  -  10251   -   kube-scheduler              self
+TCP  -  10252   -   kube-controller-manager     self
+
+worker node(s):
+---------------
+
+TCP  -  10250     -  kubelet API                  self, control plane
+TCP  -30000-32767 -  NodePort Sevices             all
+
+
+========Common for Master and Slaves Start ============
+
+# First, login as 'root' user because the following set of commands need to be executed with 'sudo' permissions.
+
+sudo su -
+
+# Install Required packages and apt keys.
+
+sudo apt-get update -y
+$ sudo apt-get install apt-transport-https curl -y
+$ curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+$ cat <<EOF >/etc/apt/sources.list.d/kubernetes.list 
+ deb https://apt.kubernetes.io/ kubernetes-xenial main
+ EOF
+
+apt-get update -y
+
+# Turn off swap space
+
+$ sudo swapoff -a
+
+$ sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
+
+# Install and Enable docker
+
+sudo apt-get install docker.io -y
+sudo usermod -aG docker $USER
+sudo usermod -aG docker ubuntu
+sudo systemctl start docker
+sudo systemctl enable docker.service
+sudo apt-get install -y kubelet kubeadm kubectl kubernetes-cni
+
+# Enable and start kubelet service
+
+systemctl daemon-reload
+systemctl restart kubelet
+systemctl enable kubelet.service
+
+
+    1  sudo apt-get updte -y
+    2  sudo apt-get update -y
+    3  sudo apt-get install apt-transport-https curl -y
+    4  curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+    5  cat <<EOF >/etc/apt/sources.list.d/kubernetes.list
+deb https://apt.kubernetes.io/ kubernetes-xenial main
+EOF
+
+    6  sudo apt-get update -y
+    7  sudo swapoff -a
+    8  sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
+   
+   10  sudo apt-get install docker.io -y
+   11  sudo usermod -aG docker $USER
+   12  sudo usermod -aG docker ubuntu
+   13  sudo systemctl restart docker
+   14  sudo systemctl enable docker.service
+   15  
+   16  sudo apt-get install -y kubelet kubeadm kubectl kuberneted-cni
+   17  sudo apt-get install -y kubelet kubeadm kubectl kubernetes-cni
+   18  systemctl daemon-reload
+   19  systemctl restart kubelet
+   20  systemctl enable kubelet.service
+
+===========COMMON FOR MASTER & SLAVES END=========
+
+=======In Master Node Start===============
+# Steps Only for Kubernetes Master
+# Switch to the root user.
+
+sudo su -
+
+# Initialize kubernetes master by executing below command.
+
+  kubeadm init
+
+#exit root user and execute as normal user
+
+  exit
+
+  mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+# To verify, if kubectl is working or not, run the following command.
+
+   kubectl get pods -o wide --all-namespaces
+
+# You will notice from the previous command, that all the pods are running except one: 'kube-dns'. 
+  For resolving this we will install a # pod network. To install the weave pod network, run the following command:
+
+   kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+   kubectl get nodes
+   kubectl get pods --all-namespaces
+
+# Get Token
+
+  kubeadm token create --print-join-command
+
+=======In Master Node End===========================
+
+Add worker Machines to Kubernetes Master
+
+===========In Worker Nodes Start============
+
+Copy kubeadm join token and execute in worker nodes to join to cluster
+
+===========In worker nodes end=================
+
+Deploy sample application
+-------------------------
+
+kubectl run nginx-demo --image=nginx --port=80
+kubectl expose deployment nginx-demo --port=80 --type=NodePort
+
+
+kubectl run --image=nginx nginx-server --port=80 --env="DOMAIN=cluster"
+ kubectl expose deployment nginx-server --port=80 --name=nginx-http
+
+
+5. Jenkins Kubernetes Integration:
+==================================
+
+- Installation of Jenkins
+- Installation of Kubernates Cluster
+- Setup Jenkins Server to deploy applications into kubernetes cluster
+- Build & Deploy Docker Applications From Jenkins in Kubernetes Cluster using pipe line script.
+
+
+Installation of Jenkins:
+========================
+
+sudo apt-get update
+    2  java -version
+    3  sudo apt install openjdk-8-jdk -y
+    4  java -version
+    5  wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+    6  sudo vim /etc/apt/sources.list
+	
+	Add the following line to the end of the file.
+	deb https://pkg.jenkins.io/debian-stable binary/
+
+    7  sudo apt-get update
+    8  sudo apt-get install jenkins
+    9  sudo systemctl enable jenkins.service
+   10  sudo ufw allow 8080
+   11  sudo ufw  reload
+   12  sudo ufw status
+   13  sudo ufw allow 80
+   14  sudo ufw allow 443
+   15  sudo ufw allow 8080
+   16  sudo ufw status
+   17  sudo ufw allow 8080
+   18  sudo ufw allow OpenSSH
+   19  sudo ufw enable
+   20  sudo ufw status
+   21  sudo systemctl status jenkins
+   21  sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+
+=> Setting up Docker in Jenkins Server:
+---------------------------------------
+
+1  sudo apt-get update
+    2  sudo apt install openjdk-8-jdk -y
+    3  sudo apt install openjdk-8-jdk
+    4  sudo apt-get install openjdk-8-jdk
+    5  java -version
+    6  sudo apt-get update
+    7  sudo apt install openjdk-8-jdk
+    8  java -version
+    9  wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+   10  sudo vim /etc/apt/sources.list
+   11  sudo apt-get update
+   12  sudo apt-get install jenkins -y
+   13  sudo systemctl enable jenkins.service
+   14  sudo ufw allow 8080
+   15  sudo ufw allow 80
+   16  sudo ufw allow 443
+   17  sudo ufw allow OpenSSH
+   18  sudo ufw enable
+   19  sudo ufw status
+   20  sudo systemctl status jenkins
+   21  sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+   22  sudo apt-get update
+   23  sudo apt install docker.io -y
+   24  sudo systemctl start docker
+   25  sudo systemctl enable docker
+   26  sudo systemctl status docker
+   27  docker --version
+
+
+# Add jenkins user to docker group
+  sudo usermod -aG docker jenkins
+
+# Restart jenkins to reflect docker permissions
+  sudo systemctl restart jenkins
+
+
+Setup Kubernetes Cluster:
+=========================
+
+Pre-requisites:
+---------------
+3 - Ubuntu Servers
+1 - Manager (4GB RAM, 2 Core) t2.medium
+2 - Workers (1GB, 1core)      t2.micro
+
+Note: Open Required Ports In AWS Security Groups. For now we will open All traffic.
+
+control node ports:
+-------------------
+
+TCP  -  6443	-   Kubernetes API server	all
+TCP  -2379-2380 -   etcd sever client API     	kube-apiserver,etcd
+TCP  -  10250   -   kubelet API			self,Control plane
+TCP  -  10251   -   kube-scheduler              self
+TCP  -  10252   -   kube-controller-manager     self
+
+worker node(s):
+---------------
+
+TCP  -  10250     -  kubelet API                  self, control plane
+TCP  -30000-32767 -  NodePort Sevices             all
+
+
+========Common for Master and Slaves Start ============
+
+# First, login as 'root' user because the following set of commands need to be executed with 'sudo' permissions.
+
+sudo su -
+
+# Install Required packages and apt keys.
+
+sudo apt-get update -y
+$ sudo apt-get install apt-transport-https curl -y
+$ curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+$ cat <<EOF >/etc/apt/sources.list.d/kubernetes.list 
+ deb https://apt.kubernetes.io/ kubernetes-xenial main
+ EOF
+
+apt-get update -y
+
+# Turn off swap space
+
+$ sudo swapoff -a
+
+$ sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
+
+# Install and Enable docker
+
+sudo apt-get install docker.io -y
+sudo usermod -aG docker $USER
+sudo usermod -aG docker ubuntu
+sudo systemctl start docker
+sudo systemctl enable docker.service
+sudo apt-get install -y kubelet kubeadm kubectl kubernetes-cni
+
+# Enable and start kubelet service
+
+systemctl daemon-reload
+systemctl restart kubelet
+systemctl enable kubelet.service
+
+
+    1  sudo apt-get updte -y
+    2  sudo apt-get update -y
+    3  sudo apt-get install apt-transport-https curl -y
+    4  curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+    5  cat <<EOF >/etc/apt/sources.list.d/kubernetes.list
+deb https://apt.kubernetes.io/ kubernetes-xenial main
+EOF
+
+    6  sudo apt-get update -y
+    7  sudo swapoff -a
+    8  sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
+   
+   10  sudo apt-get install docker.io -y
+   11  sudo usermod -aG docker $USER
+   12  sudo usermod -aG docker ubuntu
+   13  sudo systemctl restart docker
+   14  sudo systemctl enable docker.service
+   15  
+   16  sudo apt-get install -y kubelet kubeadm kubectl kuberneted-cni
+   17  sudo apt-get install -y kubelet kubeadm kubectl kubernetes-cni
+   18  systemctl daemon-reload
+   19  systemctl restart kubelet
+   20  systemctl enable kubelet.service
+
+===========COMMON FOR MASTER & SLAVES END=========
+
+=======In Master Node Start===============
+# Steps Only for Kubernetes Master
+# Switch to the root user.
+
+sudo su -
+
+# Initialize kubernetes master by executing below command.
+
+  kubeadm init
+
+#exit root user and execute as normal user
+
+  exit
+
+  mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+# To verify, if kubectl is working or not, run the following command.
+
+   kubectl get pods -o wide --all-namespaces
+
+# You will notice from the previous command, that all the pods are running except one: 'kube-dns'. 
+  For resolving this we will install a # pod network. To install the weave pod network, run the following command:
+
+   kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+   kubectl get nodes
+   kubectl get pods --all-namespaces
+
+# Get Token
+
+  kubeadm token create --print-join-command
+
+=======In Master Node End===========================
+
+Add worker Machines to Kubernetes Master
+
+===========In Worker Nodes Start============
+
+Copy kubeadm join token and execute in worker nodes to join to cluster
+
+===========In worker nodes end=================
+
+Deploy sample application
+-------------------------
+
+kubectl run nginx-demo --image=nginx --port=80
+kubectl expose deployment nginx-demo --port=80 --type=NodePort
+
+
+kubectl run --image=nginx nginx-server --port=80 --env="DOMAIN=cluster"
+ kubectl expose deployment nginx-server --port=80 --name=nginx-http
+
+---------------------------------------------------------------------------------------------------------
+
+Setup Jenkins Server to deploy applications into kubernetes Cluster:
+====================================================================
+We can deploy docker applications into Kubernetes cluster from jenkins using below 2 approaches.
+
+1. Using Kuberneres Continues Deploy Plugin:
+--------------------------------------------
+
+ - Go to Jenkins -> Manage Plugins -> Available -> Search for Kubernetes Continuous Deploy -> Select and install
+ - Add Kube config information in jenkins Credentials.
+   Jenkins -> Credentials -> Select Kube Config -> copy kubeconfig content from kubernetes cluster
+ - Use KubernetesDeploy in pipeline script
+      Ex: 
+
+
+node{
+    
+    stage('git clone'){
+        
+        git branch: 'master', url: 'https://github.com/MithunTechnologiesDevOps/spring-boot-mongo-docker.git'
+    }
+    stage('Maven clean package'){
+        def mavenHome = tool name: "Maven-3.6.3", type: "maven"
+        def mavenCMD = "${mavenHome}/bin/mvn"
+        
+        sh "${mavenCMD} clean package"
+    }
+    stage('Build Docker Image'){
+        sh "docker build -t mahesh345/spring-boot-spring-ks ."
+    }
+    stage("Docker Push"){
+        withCredentials([string(credentialsId: 'docker_hub_credentials', variable: 'docker_hub_credentials')]) {
+            sh "docker login -u mahesh345 -p ${docker_hub_credentials}"
+        }
+        sh "docker push mahesh345/spring-boot-spring-ks"
+        
+    }
+    stage("Deploy Application in k8s Cluster"){
+        kubernetesDeploy(
+            configs:'springBootMongo.yml',
+            kubeconfigid:'KUBERNETES_CLUSTER_CONFIG',
+            enableConfigSubstitution:true
+            )
+    }
+    
+}
+
+-----------------------------------------------------------
+
+2. Install kubectl and add kubeconfig in Jenkins server:
+--------------------------------------------------------
+1.
+sudo apt-get update && sudo apt-get install -y apt-transport-https
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+sudo apt-get update
+sudo apt-get install -y kubectl
+
+2. Switch to jenkins user
+
+	sudo -i -u jenkins
+
+3. create.kube folder in jenkins home directory
+ 	cd ~
+ 	mkdir .kube
+
+4. create config file and copy config file content from Kubernetes cluster master machine and seve the contenet.
+
+	vi .kube/config
+
+5. we can use kubectl commands directly in pipe line script, kubectl command will get executed in 
+   kubernetes cluster directly.
+
+ - kubectl get rc
+ - kubectl get svc
+ - kubectl delete svc mongo
+
+
+node{
+    
+    stage('git clone'){
+        
+        git branch: 'master', url: 'https://github.com/MithunTechnologiesDevOps/spring-boot-mongo-docker.git'
+    }
+    stage('Maven clean package'){
+        def mavenHome = tool name: "Maven-3.6.3", type: "maven"
+        def mavenCMD = "${mavenHome}/bin/mvn"
+        
+        sh "${mavenCMD} clean package"
+    }
+    stage('Build Docker Image'){
+        sh "docker build -t mahesh345/spring-boot-spring-ks ."
+    }
+    stage("Docker Push"){
+        withCredentials([string(credentialsId: 'docker_hub_credentials', variable: 'docker_hub_credentials')]) {
+            sh "docker login -u mahesh345 -p ${docker_hub_credentials}"
+        }
+        sh "docker push mahesh345/spring-boot-spring-ks"
+        
+    }
+    stage("Deploy Application in k8s Cluster"){
+        sh 'kubectl apply -f springBootMongo.yml'
+    }
+    
+}
+
+==========================================================

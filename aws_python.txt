@@ -1,0 +1,272 @@
+1. AWS Automation with boto3 of Python and Lambda Functions:
+============================================================
+objective of this course:
+-------------------------
+- The objective of this course is to cover the core concepts of boto3 and Lambda.
+- This course is designed to understand boto3 and Lambda concepts with real-time scenarios.
+- This course is divided into two parts.
+  - part1 - Writing and executing python boto3 on our local server(Any OS)
+  - part2 - Writing and executing python-boto3 in lambda with different triggering methods.
+- By the end of this course:
+----------------------------
+- You will get the knowledge to apply different concept of boto3 ad Lambda for different AWS services.
+
+2. What do your need for this course?
+======================================
+- AWS account
+  - It is great if you have free tier account
+- Basic knowledge on AWS services and python
+- Basic knowledge on any pyton IDLE (pycharm or atom or subline text) or at least vi/vim editor for command line.
+
+3. Introduction to boto3:
+=========================
+- Boto3 is the name of the python SDK for AWS.
+- Boto3 allows us to directly create, update, and delete AWS services from our python scripts.
+- Boto3 is built on the top of botocore module.
+- We have to install boto3 to work with AWS services using python scripts.
+- How to install boto3:
+----------------------
+  - python - 2.X
+	- pip install boto3
+  - python - 3.x
+	- pip3 install boto3
+
+4. How to install python-3.x and boto3 on windowns server?
+==========================================================
+- python-3.7.4
+- Goto www.python.org
+- Set paths for python and pip3
+- Install boto3
+	- pip3 install boto3
+
+5. How to install python-3.x and boto3 on Linux Server?
+=======================================================
+
+https://www.tecmint.com/install-python-in-rhel-8/
+
+ python --version
+    3  python2 --version
+    4  python3 --version
+    5  dnf install python3
+    6  python3
+    7  alternatives --set python /usr/bin/python3
+    8  python3 --version
+    9  cd /usr/local/bin/
+   10  ls -lrt
+   11  ls
+   12  python3.7 --version
+   13  cd
+   14  cd /usr/bin/
+   15  ll
+   16  ls
+   17  ls -py
+   18  ls python
+   19  pwd
+   20  pip3 --version
+   21  python3
+   22  pip3 install boto3 -y
+   23  pip3 install boto3
+   24  python3
+
+
+5. Boto3 Environment setup on Windows server to work with AWS services:
+=======================================================================
+- You've got the python-3.x and boto3
+- But, you won't be able to use it right now, because it doesn't know which AWS account it should connect to.
+- Then how about programmatic access when we want to manage aws services using our popular python scripting language?
+- you will need to provide/configure some valid credentials(programmatic access keys)
+- You can use either root or any IAM user programmatic access keys.
+- Lets get programmatic access keys
+
+	root account
+		Access Key ID: AKIAIUWTMM54J3GDOVBA
+	    Secret Access Key: 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
+
+- go to IAM - create users
+	    - give s3fullaccess
+
+	s3_developer
+		Access Key ID: AKIAXRX4AXQMOSM45LPK
+	    Secret Access Key: lbpHY1c4D63f5h4BHBJZb9UpeY2hP0yd9ICsiqiP
+
+
+- Configure credentails of your AWS account on windows server using awscli commands.
+	- Install awscli
+	  - pip3 install awscli
+	- Configure root/IAM user access-keys/credentials using:
+	  - aws configure --profile root
+	  - aws configure --profile non_prod
+
+C:\Users\Administrator> aws configure
+AWS Access Key ID [None]: AKIAIUWTMM54J3GDOVBA
+AWS Secret Access Key [None]: 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
+Default region name [None]: ap-south-1 				default:us-east-1
+Default output format [None]: json
+
+C:\Users\Administrator>cd .aws
+
+C:\Users\Administrator\.aws>dir
+ Volume in drive C has no label.
+ Volume Serial Number is F455-D01B
+
+ Directory of C:\Users\Administrator\.aws
+
+04/09/2020  06:06 PM    <DIR>          .
+04/09/2020  06:06 PM    <DIR>          ..
+04/09/2020  06:06 PM                47 config
+04/09/2020  06:06 PM               119 credentials
+               2 File(s)            166 bytes
+               2 Dir(s)  81,313,976,320 bytes free
+
+
+C:\Users\Administrator\.aws>dir
+ Volume in drive C has no label.
+ Volume Serial Number is F455-D01B
+
+ Directory of C:\Users\Administrator\.aws
+
+04/09/2020  06:06 PM    <DIR>          .
+04/09/2020  06:06 PM    <DIR>          ..
+04/09/2020  06:06 PM                47 config
+04/09/2020  06:06 PM               119 credentials
+               2 File(s)            166 bytes
+               2 Dir(s)  81,313,976,320 bytes free
+
+
+C:\Users\Administrator>aws configure --profile root
+AWS Access Key ID [None]: AKIAIUWTMM54J3GDOVBA
+AWS Secret Access Key [None]: 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
+Default region name [None]: ap-south-1
+Default output format [None]: json
+
+C:\Users\Administrator>aws configure --profile s3_developer
+AWS Access Key ID [None]: AKIAXRX4AXQMOSM45LPK
+AWS Secret Access Key [None]: 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
+Default region name [None]: ap-south-1
+Default output format [None]: json
+
+
+C:\Users\Administrator>cd .aws
+
+C:\Users\Administrator\.aws>dir
+ Volume in drive C has no label.
+ Volume Serial Number is F455-D01B
+
+ Directory of C:\Users\Administrator\.aws
+
+04/09/2020  06:19 PM    <DIR>          .
+04/09/2020  06:19 PM    <DIR>          ..
+04/09/2020  06:22 PM               112 config
+04/09/2020  06:22 PM               240 credentials
+               2 File(s)            352 bytes
+               2 Dir(s)  81,313,738,752 bytes free
+
+C:\Users\Administrator\.aws>type config
+[profile root]
+region = ap-south-1
+output = json
+[profile s3_developer]
+region = ap-south-1
+output = json
+
+C:\Users\Administrator\.aws>type credentials
+[root]
+aws_access_key_id = AKIAIUWTMM54J3GDOVBA
+aws_secret_access_key = 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
+[s3_developer]
+aws_access_key_id = AKIAXRX4AXQMOSM45LPK
+aws_secret_access_key = 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
+
+C:\Users\Administrator\.aws>
+
+
+7. Boto3 Environment setup on Linux Server to Work with AWS Services:
+=====================================================================
+- Configure credentails of your AWS account on windows server using awscli commands.
+	- Install awscli
+	  - pip3 install awscli
+	- Configure root/IAM user access-keys/credentials using:
+	  - aws configure --profile root
+	  - aws configure --profile non_prod
+
+8. Verifying Boto3 Environment setup on windows and linux servers to work with AWS services:
+=============================================================================================
+- Verifying Boto3 Environment setup
+------------------------------------
+- Our Env setup is:
+ - Python3.7.7, boto3 and awscli
+
+- Manual steps to see/list all IAM users
+-----------------------------------------
+- Get AWS Management Console
+- Get IAM Console
+  Options: Users, Groups, roles....
+---------------------------------------
+boto3 steps:
+------------
+import boto3
+
+aws_mag_console=boto3.session.Session(profile_name="root")
+iam_con=aws_mag_console.resource('iam')
+
+for each_user in iam_con.users.all():
+   print(each_user.name)
+
+----------------------------------------
+
+import boto3
+aws_mag_console=boto3.session.Session(profile_name="root")
+s3_con=aws_mag_console.resource('s3')
+for each_bucket in iam_con.users.all():
+   print(each_bucket.name)
+
+---------------------------------------
+
+[root@ip-172-31-43-247 boto3_script]# cat list_iam_users.py
+#!/usr/bin/python
+
+import boto3
+
+aws_mag_console=boto3.session.Session(profile_name="root")
+iam_con=aws_mag_console.resource('iam')
+
+for each_user in iam_con.users.all():
+   print(each_user.name)
+[root@ip-172-31-43-247 boto3_script]# python3 list_iam_users.py
+s3_developer
+
+
+#!/usr/bin/python
+
+import boto3
+aws_mag_console=boto3.session.Session(profile_name="root")
+s3_con=aws_mag_console.resource('s3')
+for each_buck in s3.con.buckets.all():
+   print(each_buck.name)
+
+
+------------------------------------------
+
+9. Boto3 Collections Concepts of resource objects:
+==================================================
+
+
+
+#!/usr/bin/python
+
+import boto3
+aws_mag_con=boto3.session.Session(profile_name="root")
+ec2_con_re=aws_mag_console.resource(service_name="ec2",region_name="ap-south-1")
+for each in ec2_con_re.instances.all():   /for each in ec2_con_re.instances.filter():/
+  print(each)
+
+
+-------------------------------------------------------------------------------
+
+import boto3
+aws_mag_con=boto3.session.Session(profile_name="root")
+ec2_con_re=aws_mag_console.resource(service_name="ec2",region_name="ap-south-1")
+f1={"Name": "instance-state-name", "Values":['running']}
+for each in ec2_con_re.instances.filter():
+  print(each)
+

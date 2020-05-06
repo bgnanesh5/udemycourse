@@ -1,0 +1,421 @@
+1. Demo AWS Lambda with boto3:
+==============================
+- AWS Lambda
+- Python
+
+AWS Lambda:
+===========
+- Using AWS lambda we can run out code without carring about the servers.
+- It is also called as server less architecture.
+
+Benifits:
+---------
+- No servers to manage.
+- Lambda (executes) runs on latest generation computers
+- Auto scales
+- We do not pay for lambda when out code is idle.
+
+Lambda Use cases:
+-----------------
+1. We can run lambda in reponse to events.
+   a. File uploaded to S3 -> we wanna process the file and store data into dynamodb
+   b. Create thumnails for images that is uploaded in S3.
+   c. Resize images when they are uploaded to S3
+   d. Transcoding videos automatically when they are uploaded to S3
+   e. Automation of EBS snapshots
+   f. Lambda for serverless architecture
+ 
+
+Use case:
+=========
+
+- When a ec2 instance stop we wanna send a e-mail with instance id to respective team.
+- Services we are palnning to use:
+	- For sending emails we use SNS.
+	- Permissions for Lambda.  Lambda should have permissions to access SNS and cloudwatch logs.
+
+goto - IAM - 
+
+=> 1.create policies
+--------------------
+
+Service - 1.SNS  
+Access level - 1. publish (Limited: Write) 
+Resources - 1. All resources 
+
+- Add aditional permissions:
+
+Service - 2. CloudWatchlog
+Actions - 2. All CloudWatch Logs actions (logs:*)
+Resources - 2. All resources 
+
+
+=>2.Create Roles:
+-----------------
+- create new role - selsect lambda - select permissions - sns_logs_lambda_demo
+
+=> Create SNS Topic(Simple Notification Service):
+-------------------------------------------------
+1.Create topic:
+2.Create Subscriptions:
+3. do some dummy publish messages
+
+=> goto sevices
+	- select lambda
+	- create function
+	- Runtime
+		- python
+	- Execution role
+		- sns_logs_lambda_demo role
+
+4. Add triggers
+	- create cloudwatch event
+	- Rule
+		- create new rule
+	- Rule name*
+		- when_ec2_stops_in_prod
+	- Rule type
+		- Event pattern - EC2 - EC2 instance change
+
+
+
+
+import boto3
+client = boto3.client('sns')
+
+def lambda_handler(event, context):
+    client.publish(
+        TopicArn='arn:aws:sns:ap-south-1:519145831448:lambda-demo',
+        Message='EC2 service stopped',
+        Subject='EC2 instance-service stopped')
+
+
+import boto3
+client = boto3.client('sns')
+
+def lambda_handler(event, context):
+    instance_id = event['details']['instance_id']
+    message = "Hi Team instance with id ={}, has stopped".format(instance_id)
+    client.publish(
+        TopicArn='arn:aws:sns:ap-south-1:519145831448:lambda-demo',
+        Message=message,
+        Subject='EC2 instance-service stopped')
+
+
+
+
+
+- goto coludwatch
+	- check loggroups latest
+
+
+{
+  'version': '0',
+  'id': '7bb1ccd6-492c-90ff-e0c0-7f346835e022',
+  'detail-type': 'EC2 Instance State-change Notification',
+  'source': 'aws.ec2',
+  'account': '519145831448',
+  'time': '2020-05-01T19:38:18Z',
+  'region': 'ap-south-1',
+  'resources': [
+    'arn:aws:ec2:ap-south-1:519145831448:instance/i-05d4f9b937088cb4a'
+  ],
+  'detail': {
+    'instance-id': 'i-05d4f9b937088cb4a',
+    'state': 'stopped'
+  }
+}
+
+	
+
+2. AWS Lambda: Boto3 lambda, send notification when ec2 stops:
+==============================================================
+
+Requirement:
+------------
+Send email notification when a specific instance(s) stops in the producation environment.
+
+ec2 --> labdafunction --> SNS topic --> SNS subscribers
+
+
+Required AWS resources:
+-----------------------
+1. EC2
+2. SNS Topic
+3. IAM Role for Lambda to access SNS topic and CloudWatch logs
+4. Lambda (python)
+5. CloudWatch Events - to schedule
+
+import boto3
+client = boto3.client('sns')
+
+def lambda_handler(event, context):
+    client.publish(
+        TopicArn='arn:aws:sns:ap-south-1:519145831448:lambda-demo',
+        Message='EC2 service stopped',
+        Subject='EC2 instance-service stopped')
+
+
+3. AWS Lambda: run EC2 instances in Schedule using python:
+==========================================================
+
+Requirement:
+------------
+Scheduling ec2 instances, start instance at 9AM and stop them at 6PM.
+Condition: Instances with tag key = "Type" and Value = "Scheduled"
+Condition: Mod- Friday
+
+
+1) IAM Role for the lambda -> first create policies in IAM, EC2 instance, AWS cloudwatch logs
+2) Create Lambda function
+3) in IAM policies add Descriptionevent as well in Actions
+4) Schedule this lambda function
+
+Using CloudWatch we can schedule:
+---------------------------------
+goto CloudWatch -> Rules -> select Schedule -> enter cron expression
+
+Cron Expression:
+	0 9 ? * MON-FRI *
+
+
+code:
+=====
+import boto3
+
+ec2 = boto3.resource('ec2')
+
+def lambda_handler(event, context):
+    instances = ec2.instances.filter(
+        Filters=[
+            {'Name': 'tag:Type',
+            'Values': ['Scheduled']
+                
+            }
+            ])
+            
+    for instance in instances:
+        instance.start()
+        
+        return 'success'
+
+
+
+4. JSON - S3 bucket - Lambda - Dynamodb:
+=======================================
+
+
+
+1) IAM first create policies in IAM, S3, AWS cloudwatch logs, DynamoDB
+2) IAM Role for the lambda
+2) Create Lambda function
+3) in IAM policies add Descriptionevent as well in Actions
+4) Schedule this lambda function
+
+
+import boto3
+import json
+s3_client = boto3.client('s3')
+dynamodb = boto3.resource('dynamodb')
+def lambda_handler(event, context):
+    bucket = event['Records'][0]['s3']['bucket']['name']
+    json_file_name = event['Records'][0]['s3']['object']['key']
+    json_object = s3_client.get_object(Bucket=bucket,key=json_file_name)
+    jsonFileReader = json_object['Body'].read()
+    jsonDict = json.loads(jsonFileReader)
+    table = dynamodb.Table('employees')
+    table.put_item(Item=jsonDict)
+    return 'success'	        
+
+
+
+5. AWS Boto3 - How to put item into AWS Dynamodb table?
+=======================================================
+1) create table in dynamodb
+
+import boto3
+dynamodb = boto3.resource('dynamodb')
+table = dynamodb.Table('employee')
+table.put_item(
+	Item={
+	'employee_id':'1',
+	'name':'Jane',
+	'age':25,
+	}
+)
+
+
+
+6. AWS Remove unused AMIs:
+==========================
+
+import boto3
+client = boto3.client('ec2')
+
+instances = client.describe_instances()
+used_amis = []
+for reservation in instances['Reservations']:
+	for instances in reservation['Instances']:
+		used_amis.append(Instance['Imageid'])
+
+print(used_amis)
+# Remove duplicate amis
+def remove_duplicates(amis):
+	unique_amis = []
+	for ami in amis:
+		if ami not in unique_amis:
+			unique_amis.append(ami)
+			return unique_amis
+
+			unique_amis = remove_duplicates(used_amis)
+
+			print(used_amis)
+
+
+# get custom amis from the content
+
+client.describe_images(
+Filters=[
+        {
+            'Name': 'string',
+            'Values': [
+                'string',
+            ]
+        },
+    ],
+Owners= ['self']
+)
+
+custom_amis_list = []
+
+for image in custom_images['Images']:
+	custom_amis_list.append(iamge['ImageId'])
+
+for custom_amis in custom_amis_list:
+	if custom_amis not in used_amis:
+		print("deregistering ami{}".format(custom_amis))
+		client.deregister_image(ImageId=image['ImageId'])
+ 
+
+
+7.  AWS Boto3 ec2 instance filters:
+===================================
+
+import boto3
+ec2 = boto3.resource('ec2')
+ec2_filter = [ {
+            'Name' : 'instance-state-name',
+            'Values' : [ 'running' ]
+        } ]
+
+# list of instances
+ec2.instances.filter(Filter=ec2_filter).stop()
+ 
+
+
+
+
+8. Boto3 Launch EC2 Instances:
+==============================
+import boto3
+client = client.run_instances('ec2')
+
+response = client.run_instances(ImageId='ami-id'),
+			   instanceType='t1.micro',
+				          MaxCount=1,
+				          MinCount=1,
+
+for instance in response['instances']:
+	print(instance['instanceId'])
+
+
+
+
+9. Boto3 Collections:
+=====================
+
+import boto3
+ec2 = boto3.resource('ec2')
+for instance in ec2.instances.all():
+    print('Instance id is {} and Instance Type is {}'.format(instance.instance_id,instance.instance_type))
+
+
+10. Aws-Boto3: Deleting EBS Snapshots, older than X days:
+========================================================
+11.AWS Boto3 Dynamo DB Batch writes:
+=====================================
+- using range funcation to enter 10000 entries into dynamo DB
+
+12. Versioning AWS Lambda:
+==========================
+- create lamdafunction
+- schedule this function using cloudwatch
+
+
+def lamda_handler(event, context):
+     print('welcome to lambda') 
+
+
+13.  AWS Lambda Read CSV from S3 and Load to DynamoDB:
+======================================================
+
+- create table in dynamodb
+- create lamda funcation 
+
+import boto3
+s3_client = boto3.client("s3")
+def lambda_handler(event, context):
+	bucket_name = event['Records'][0]['s3']['bucket']['name']
+        s3_file_anme = event['Records'][0]['s3']['object']['key']
+	resp = s3_client.get_object(Bucket=bucket_name,key=s3_file_name)
+	data = resp['Body'].read().decode("utf-8")
+	employees = data.split("\n")
+	for emp in employees:
+		print(emp)
+	emp_data = emp.split(",")
+	# Add it to dynamodb
+	try:
+	   table.put_item(
+	   item = {
+		"id" = emp_data[0],
+		"name" = emp_data[1],
+		"location" = emp_date[2]
+		}
+		)
+	
+
+14. AWS Lambda Find Unused Volumes:
+===================================
+import boto3
+ec2_client = boto3.client('ec2')
+volumes = ec2_client.describe_volumes(
+for volume in volumes['volumes']:
+	if 	
+print(volume)
+	
+
+
+
+15. AWS Secrets Manager:
+=======================
+Scretes manager
+
+
+
+
+17. Serverless Architecture & Lambda:
+=====================================
+Serverless Benefits:
+-------------------
+- Zero Server management
+- High Availability
+- Flexible Scaling
+- No Idle Capacity
+
+18. Demo: Create AWS Lambda Function:
+====================================
+
+19. AWS Lambda performance tuning, Timeouts, running in VPC:
+=============================================================
+memory default - 128 MB
+

@@ -1,0 +1,145 @@
+Powershell Introduction:
+========================
+Powershell is a task automation framework built on .Net Framework to provide a uniform command line
+experience to administrator and other folks who wants to control and configure the system.
+
+Uniform Command Access:
+=======================
+Powershell commands provide Verb-noun
+syntax.
+
+ex:
+---
+1. get-process
+2. stop-process
+3. get-content
+4. start-process
+
+Uniform Access using drive:
+===========================
+
+Uniform method to access registry, environment variables, or drives.
+Get-psdrive would list the real and virtual drives which powershell uses.
+
+Powershell command types:
+=========================
+
+Powershell commad or scripts could be of the following type:
+
+Alias
+Cmdlet
+Functions
+Scripts
+Executable or Binary which are present in PATH
+
+Pipelining in powershell:
+=========================
+Pipelining in powershell is a concept to send the output of a cmdlet/function to
+another set of cmdlet/function using |. Unlike unic the data passed in pipe
+are objects rather than text.
+
+ISE - Integrated Subscripted Engine
+
+PS C:\Users\Administrator> history
+
+  Id CommandLine
+  -- -----------
+   1 get-process
+   2 (get-process)|get-members
+   3 (get-process)|get-member
+   4 (get-process).Threads
+   5 dir
+   6 get-alias -name dir
+   7 get-alias -name ps
+   8 ps
+   9 get-psdrive
+  10 get-childitem c:
+
+2. Start - Transcript and Powershell Version:
+=============================================
+PS C:\Users\Administrator> $PSVersionTable
+
+12 $PSVersionTable
+  13 $PSVersionTable.PSVersion
+  14 PS C:\Users\Administrator> $PSVersionTable
+  15 start-Transcript
+  16 start-Transcript -path c:\temp\history.txt
+  17 get-command
+  19 stop-Transcript
+
+
+3. Execution Policy:
+====================
+C:\Users\Administrator> powershell C:\temp\psexecution.ps1
+
+PS C:\Users\Administrator> Get-ExecutionPolicy
+Unrestricted
+
+To provide Execution policy:
+----------------------------
+
+PS C:\Users\Administrator> Set-ExecutionPolicy RemoteSigned
+
+
+
+4. How to get and set Alias and how to use pushd and popd:
+==========================================================
+if you want jump particualr path directly we will use pushd and popd
+pushd - copy pwd 
+popd - for move to previous path 
+PS C:\Users\Administrator> get-alias | findstr /s ps
+Alias           epsn -> Export-PSSession
+Alias           gps -> Get-Process
+Alias           ipsn -> Import-PSSession
+Alias           npssc -> New-PSSessionConfigurationFile
+Alias           ps -> Get-Process
+Alias           saps -> Start-Process
+Alias           spps -> Stop-Process
+Alias           spsv -> Stop-Service
+
+
+
+21 powershell C:\temp\psexecution.ps1
+  22 Get-ExecutionPolicy
+  23 Set-ExecutionPolicy RemoteSigned
+  24 powershell C:\temp\psexecution.ps1
+  25 get-alias
+  26 get-alias | findstr /s pwd
+  27 pwd
+  28 get-alias | findstr /s gps
+  29 gps
+  30 get-alias | findstr /s ps
+  31 get-alias | findstr /s cwd
+  32 set-alias cwd Get-Location
+  33 cwd
+  34 cd C:\temp\
+  35 pushd .
+  36 cd
+  37 cd ..
+  38 pushd
+  39 popd
+  40 cd .\temp\
+  41 pushd C:\Users\Administrator\
+
+
+5. get-childitem and formatting the output of command:
+======================================================
+
+43 Get-ChildItem 	- it will shows the pwd dir/files
+  44 Get-ChildItem -path C:\temp\ 	- path files/dir
+  45 Get-ChildItem C:\temp\
+  46 dir
+  47 Get-ChildItem -path  C:\Users\Administrator\ -Recurse   - it shows the dir and under dir it shows all files
+  48 Get-ChildItem -Name dir
+  49 Get-Alias -Name dir
+  50 Get-ChildItem -path  C:\Users\Administrator\ | Format-List
+  51 Get-ChildItem -path  C:\Users\Administrator\ | Format-Table
+  52 Get-ChildItem -path  C:\Users\Administrator\ | Format-wide
+  53 Get-EventLog -LogName System -EntryType Error		- errors
+  54 Get-EventLog -LogName System -EntryType Error | Format-List | more 	- it shows errors in full format
+  55 "hello"
+  56 write-host "hello"
+
+
+6. get-command and how to navigate help, measure-object and count:
+==================================================================

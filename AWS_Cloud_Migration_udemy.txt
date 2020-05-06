@@ -1,0 +1,135 @@
+AWS Cloud Migration:
+====================
+. What is Migration? Why Migration to Cloud?
+. Migration strategies: The 6 R's
+. what is VM Import Export
+. Common Uses for VM Import Export
+. How VM Import Export Works
+. VM Import Export Steps
+. VM Import Export - Demo/Recap
+
+. What is Migration? Why Migration to Cloud?
+============================================
+Cloud Migration: The process of tranferring data, applications, workloads from On-Permises to cloud
+---------------   [AWS, Azure, GCP or any cloud providers]
+
+
+Why : 
+---
+- Operational Costs: Operational costs are the costs of running your infrasture
+- Workforce productivity: It is how efficiently you are able to get your services to market.
+- Cost Avoidance: Cost avoidance is setting up an environment that does not create unnecessary costs
+- Operational Resilience: Operational resilience is reducing your organization's risk profile and the cost of risk mitigation
+- Business Agility: Ability to react quickly to changing market conditions. you can expand into new markets, take products to market quickly
+
+
+Migration Strategies: The 6 R's:
+=================================
+1. Re-host:  lift and shift
+2. Re-platform: lift, tinker, and shift
+3. Re-purchase: Drop-and-Shop
+4. Re-factor/Re-architect: Redesign, Cloud Native 
+5. Re-tain: Do nothing, for now-revisit
+6. Re-tire: Decommission or Get rid of.
+
+
+VM Import and Export:
+=====================
+. What is VM Import Export
+. Common Uses for VM Import Export
+. How VM Import Export Works
+. VM Import Export Steps
+
+
+What Is VM Import/Export:
+=========================
+. VM Import/Export enables you to Import Virtual Machine(VM) images from your existing
+  virtualization environment(On-Prem,DC) to Amazon EC2,and also to Export them back to your- On-Prem
+  
+. You can import Windows and Linux VMs that use VMware ESX or Workstation, Microsoft Hyper-v, and
+  Citrix Xen virtualization formats.
+
+. VM Import will convert your VM into an Amazon EC2 AMI, which you can use to run Amazon EC2 instances.
+
+. AWS SMS (Server Migration Service): For large VM infrastructures, automates the import process
+  there by reducing the workload of migrating large VM infrastructures.
+
+
+Commom Uses for VM Import/Export:
+---------------------------------
+. Migrate your existing Applications and Workloads to Amazon EC2
+. Import your VM Image Catalog to Amazon EC2
+. Create a Disaster Recovery Repository for your VM images
+
+Pricing:
+--------
+. VM Import/Export is available at no addditional charge,but you are 
+  Charged for standard usage of Amazon EC2 and Amazon S3.
+
+
+How VM Import/Export Works:
+===========================
+
+VM -> Stopped VM --- Export from Virtualization environment ---> RAW,VHD,VMDK,OVA ---Import to AMZ S3---> VM catalog --create AMI--> AMI(Region)
+
+AMI ---Create-instance-export-task---> Export from AMZ EC2 -> OVA,VHD,VNDK -> start VM -> VM
+
+
+VM Import Export Steps:
+-----------------------
+. Prerequisite:
+   . Download, install and configure AWS CLI.
+   . vmimport - VM Import Service Role.
+
+1. Export VM from its current environmment as an OVA file (or VMDK, VHD, or RAW)
+   (if you are testing this make sure the VM has at least one user configured with password)
+2. Create a S3 bucket and upload the VM image to S3 using upload/drag, or drop, or using AWS CLI.
+3. Import your VM using the ec2 import-image command
+4. Use the ec2 describe-import-image-tasks commad to monitor the import progress.
+5. Once Import is completed Launch EC2 Instance from the AMI created, or copy the AMI to other region.
+
+
+VM Migration using AWS VM Import Export:
+========================================
+1. Install AWS CLI in windows/linux
+2. create IAM user - add user
+	- select - Programmatic access  
+	- select - Attach existing policies directly - select AdministratorAcess
+	- we will get ACCESS key and SECRET Key
+        - Access Key - AKIAXRX4AXQMPUG7U5PX
+	- Secret key - 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
+
+3. aws configure in AWSCLI
+
+C:\Users\Administrator>aws --version
+aws-cli/1.18.39 Python/3.7.7 Windows/10 botocore/1.15.39
+
+C:\Users\Administrator>aws configure
+AWS Access Key ID [None]: AKIAXRX4AXQMPUG7U5PX
+AWS Secret Access Key [None]: 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
+Default region name [None]: us-east-1
+Default output format [None]: text
+
+4. Stop the VM 
+5. Create S3 bucket and upload the stoppped VM/drag and drop
+6. vmimport - VM Import Service Role
+  link
+	https://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html
+7. create role
+8. role-policy.json
+9. put-role-policy
+10. container.json
+11. check AMI's in Amz
+
+
+awscli
+exported our VM ova
+uploaded VM OVA ==> S3
+VMimport role, attached policies
+
+import process import-image
+
+describe-import-image-tasks
+
+AMI - Copy AMI in Action
+
