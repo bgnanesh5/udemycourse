@@ -1,0 +1,3438 @@
+Language Fundamentals:
+======================
+1. Introduction:
+-------------
+- Python is a programming language
+- It is a High level programming language
+
+a = 10
+b = 20
+c = 30 if a>b else 40
+print(c)
+
+- It is general purpose high level programming language
+- Guido Van Rossum has developed python - 1989 - NRI - Netherland -Feb 20th 1991
+- java - 1995
+- Simple language & easy to understand
+- Very less code|concise code
+- AI, ML, DL,NN
+- IOT....
+- It is dynamically typed programmed language
+
+2. Easiness of python when compared with other language:
+========================================================
+print("hello world")
+
+for run java code - javac test.java
+		  - java test
+
+a = 10
+b = 20
+c = a+b
+print("sum of c is:" , c)
+print(type(a))
+
+sum of c is: 30.5
+<class 'float'>
+
+
+3. why the name python:
+=======================
+The complete monty python circus
+	BBC - 1969 - 1974
+
+
+4. Python as All Rounder:
+==========================
+- It is borrowed from Functional programming features from C
+- OOPs features from C++
+- Scripting language features from Perl,shell script
+- Modular programming features from Modula - 3
+- C - language and ABC - language
+
+OOPs in python:
+---------------
+class Test:
+	def m1(self):
+		print("hi all")
+
+t=Test()
+t.m1
+
+
+
+5. Where we can use Python:
+===========================
+- Develop Desktop applications
+- Web applications
+- Networking applications
+- Games
+- Data Analysis
+- ML(Machine learning),DL(Deep learning),NN(Nural Network), AI, IOT ....
+- Data Science
+
+6. Features of Python: Part-1:- 33 reserved words
+==============================
+- Simple and easy to learn
+- Freeware and open soucrce
+- High level programming language
+- Platform independent
+- Portability
+- Dynamically Typed
+- Both Procedure oriented & Object Orient
+- Interpreted
+- Extensible
+- Embedded
+- Extensive library
+
+- Concise code - 
+	print(open('abc.txt').read())
+
+
+7. Part-2:
+==========
+Freeware and open source:
+-------------------------
+Java - Oracle
+C#.Net - Microsoft
+Python - PSF (Python Software foundation) - python.org
+- java - Jython
+- C#.Net - Iron Python
+- Hadoop - Anaconda python
+
+High level programming language:
+--------------------------------
+- Memory mgnt and security mgnt
+
+Platform Independent:
+---------------------
+PVM (Python Virtual Machine)  for Windows/Linux/MAC 
+
+Portability:
+------------
+- Run in any platform with same code.
+
+8. Part - 3:
+============
+Dynamically Typed:
+-------------------
+- Statically typed - java, c c++ - int a =10
+- Dynamically typed - python = a=10
+
+Both procedure oriented and object oriented:
+--------------------------------------------
+Interpreted: - compile by c, run in py
+------------
+9. Part - 4:
+===========
+extensible:
+----------
+- we can use legacy non-python code
+Embedded:
+---------
+python can use any other language
+extensive library:
+------------------
+OTP generation:
+---------------
+from random import randint
+for i in range(10):
+	print(randint(0,9),randint(0,9),randint(0,9),randint(0,9),randint(0,9),sep='')
+
+
+
+10. Features of Python:
+-----------------------
+all the above
+
+
+11. Limitations and Flavors of Python:
+======================================
+ML - py is the best options as it is having libraries
+   - numpy, pandas, matplotlib
+
+- Mobile applications - python not useful - IOS shift, Android
+- Enterprise applications- Banking applications, messaging, Telecom applications..
+- Performance is low
+	JIT compiler + PVM
+	= pypy version(Python for speed)
+
+
+Flavours of python:
+-------------------
+- Cpython:
+----------
+	C - Language applications
+- Jpython/Jython:
+----------------
+	Java Application - JVM
+- Iron Python:
+--------------
+	To work with C#.NET
+- Ruby python:
+---------------
+	Ruby platform
+- Anaconda Python:
+-------------------
+	ML, AI, work with large volume of data
+- Stackless:
+------------
+	python for concurrency
+- pypy:
+-------
+	JIT Compiler
+
+
+12. Python Versions:
+====================
+python 0.9.0 - Feb 20th 1991
+python 1.0 - Jan 1994
+python 2.0 - Oct 16th, 2000
+python 3.0 - Dec 3rd, 2008
+
+Backward compatibility
+
+python 2.x vs python 3.x
+-------------------------
+Both are different
+
+13. Python Identifiers:
+=======================
+
+Name - Varible/clas/method
+
+Rules to create identifiers:
+----------------------------
+1. a - z
+   A - Z
+   0 - 9
+   _
+
+
+cash=10
+>>> all@hands=30
+  File "<stdin>", line 1
+SyntaxError: can't assign to operator
+>>> all"@"hands=30
+  File "<stdin>", line 1
+    all"@"hands=30
+         ^
+2. 
+>>> 123total=20
+  File "<stdin>", line 1
+    123total=20
+           ^
+SyntaxError: invalid syntax
+
+3.
+- Python is a case sensitive language
+
+4. No length limitation
+5. Keywords should not use as identifier ex- if, for....
+
+x -> Variable
+_x -> Protected variable
+_ _x -> Private variable
+_ _x_ _ --> Magic varibale
+
+
+14. Python Reserved Words/Key words:
+====================================
+33 - reserved words
+53 - reserved words in java
+
+Truee, False, None
+and, or, not, is
+if, elif, else
+while, for, break, continue, return, in, yield
+try, except, finally, raise, assert
+import, from, as, class, def, pass,
+global, nonlocal, lambda, del, with
+
+
+- Contains only alphabet symbols
+- Except the following & all contains only lower case alphabet symbol
+	True, False, None
+- switch concept is not there in python
+- do-while is not there in python
+- int, float... are not required in python
+
+
+>>> import keyword
+>>> keyword.kwlist
+['False', 'None', 'True', 'and', 'as', 'assert', 'async', 'await', 'break', 
+'class', 'continue', 'def', 'del', 'elif', 'else', 'except', 'finally', 'for', 
+'from', 'global', 'if', 'import', 'in', 'is', 'lambda', 'nonlocal', 'not', 'or', 
+'pass', 'raise', 'return', 'try', 'while', 'with', 'yield']
+
+
+15. Data Types Introduction:
+============================
+- In python type concept is not applicable
+- In python type concept is available,
+  but we are not required to declare explicitly.
+	a=False
+	print(type(a))
+- around 14 data types
+- int, float, complex, bool, str, list, tuple, set, frozenset, dict, 
+  bytes, bytearray, range, None
+  
+- Everything in python is Object
+- To find address of a is:
+	a=10
+	print(id(a))
+	----------
+	140728405884256
+	[Finished in 0.2s]
+
+
+16. Data Types: int data type:
+==============================
+- long int is available only in python - 2
+    long also we can define in int 
+
+a=10
+  - decimal form (base-10):
+  -------------------------
+      0-9 
+     a=123
+     a=986
+  - binary form (base-2)
+  -----------------------
+    0 and 1
+     a=11111
+    0b/oB
+
+a=0B1111
+print(type(a))
+print(a)
+------------
+<class 'int'>
+15
+[Finished in 0.1s]
+
+  - octal form (base-8)
+     0 - 7
+	0o or 0O
+
+a=0O1111
+print(type(a))
+print(a)
+------
+<class 'int'>
+585
+[Finished in 0.3s]
+
+  - Hexa decimal (base-16)
+    0-9
+    A-F
+    A=10
+
+  0x/oX
+
+a=0x1111
+print(type(a))
+print(a)
+--------------
+<class 'int'>
+4369
+[Finished in 0.1s]
+
+
+17. Data Types: Base Conversion Functions:
+==========================================
+1. bin() -> 
+	>>> bin(15)
+	'0b1111'
+	>>> bin(0o1234)
+	'0b1010011100'
+	>>> bin(0xface)
+	'0b1111101011001110'
+	>>>
+2. oct() ->
+	>>> oct(0xface)
+	'0o175316'
+3. hex() ->
+	>>> hex(1000)
+	'0x3e8'
+
+
+18. Data Types: float data type:
+================================
+f = 12.34
+f = 1.2e3 - exponential form/scientific notation
+
+f=1.2e3
+print(f)
+---------
+1200.0
+[Finished in 0.1s]
+
+
+19. Data Types: complex data type:
+==================================
+a+bj
+a = real part
+b = imaginary part
+j = j2 = -1
+
+
+f=10+20j
+g=10.5+30j
+print(f)
+print(type(f))
+print(f.real)
+print(f.imag)
+print(f+g)
+print(f*g)
+print(f/g)
+-------------
+(10+20j)
+<class 'complex'>
+10.0
+20.0
+(20.5+50j)
+(-495+510j)
+(0.6978470675575353-0.089086859688196j)
+[Finished in 0.2s]
+
+
+20. Data Types:bool data type:
+==============================
+True,False
+True - 1
+False - 0
+
+
+a=10
+b=20
+c=a>b
+print(c)
+print(type(c))
+
+print(True+True)
+print(True-False)
+print(True*False)
+-------------------
+False
+<class 'bool'>
+2
+1
+0
+[Finished in 0.2s]
+
+21. Data Types: str data type representations by using single, duble and triple quotes:
+=======================================================================================
+Triple quotes:
+- -------------
+- To define multi line string literals
+a = '''mahesh
+       lokesh
+        naresh'''
+print(type(a))
+print(a)
+---------------
+<class 'str'>
+mahesh
+       lokesh
+        naresh
+[Finished in 0.1s]
+
+- if we want to use single and double cottoes as normal characters
+
+>>> s='class by 'durga' is vary good'
+  File "<stdin>", line 1
+    s='class by 'durga' is vary good'
+                     ^
+SyntaxError: invalid syntax
+>>> s="class by 'durga' is vary good"
+>>> print(s)
+class by 'durga' is vary good
+
+- To define doc string
+
+22. Data Types: str data type-positive and negative index:
+==========================================================
+s='durga'
+print(s[0])
+print(s[3])
+print(s[-1])
+print(s[-4])
+------------
+d
+g
+a
+u
+[Finished in 0.1s]
+
+23. Data Types: str data type-Slice Operator:
+=============================================
+s[begin:end]
+return substring(slice) from begin index to end-1 index
+
+s='durga'
+print(s[0:5])   #returns string from 0 to 4 index
+--------------
+durga
+[Finished in 0.1s]
+
+s='durga'
+print(s[:5])
+--------------
+durga
+[Finished in 0.1s]
+
+
+s='durgasoftware'
+print(s[3:500])
+-------------------
+gasoftware
+[Finished in 0.2s]
+
+s='durgasoftware'
+print(s[5:3])
+---------------
+
+[Finished in 0.1s]
+
+
+24. Data Types: str data type-slice operator applications:
+==========================================================
+s='durgasoftware'
+ouput1=s[0].upper()+s[1:len(s)-1]+s[-1].upper()
+output=s[0:len(s)-1]+s[-1].upper()
+print(output)
+print(ouput1)
+------------
+durgasoftwarE
+DurgasoftwarE
+[Finished in 0.1s]
+
+25. Data Types: + and * operators for str data type:
+====================================================
+s='durga'+'software'
+print(s)
+a='durga'*3  #string repitation operator
+print(a)
+d=3*'durga'
+print(d)
+print('#'*20)
+print('DurgaSoft')
+print('#'*20)
+
+--------------------
+
+durgasoftware
+durgadurgadurga
+durgadurgadurga
+####################
+DurgaSoft
+####################
+[Finished in 0.3s]
+
+conclusion:
+-----------
+1. The following data types are considered as fundamental data types
+    int, float, complex, bool, str
+2. long data type available only in python-2 but not in python-3
+3. There is no caht data type in python, char values also we can represent by using str type
+
+26. Type Casting: introducation and int() funcation:
+====================================================
+casting means conversion one type of value to another : int to str
+
+1. int():
+----------
+ To convert from other types to int()
+ - float to int:
+---------------
+s=int(10.9834)
+print(s)
+-----------
+10
+[Finished in 0.6s]	
+
+- complex to int
+-----------------
+- TypeError: can't convert complex to int
+
+- bool to int
+--------------
+a=int(True)
+print(a)
+----
+1
+[Finished in 0.3s]
+
+- string to int
+---------------
+* string internally contains only integral values & base-10
+s=int('176')
+print(s)
+----
+176
+
+
+27. Type Casting:float() and complex() functions:
+=================================================
+1. float to int
+
+s=float(176)
+print(s)
+a=float(0b111)
+print(a)
+-----
+176.0
+7.0
+[Finished in 0.1s]
+
+- complex to float
+-----------------
+- TypeError: can't convert complex to int
+
+- bool to float
+--------------
+a=float(True)
+print(a)
+----
+1.0
+[Finished in 0.3s]
+
+- string to float
+---------------
+* string internally contains only integral values & base-10
+s=float('176')
+print(s)
+----
+176.0
+
+- complex:
+----------
+- int to complex:
+-----------------
+form1:complex(x):		
+----------------
+s=complex(176)
+print(s)
+a=complex(10.5)
+print(a)
+b=complex(True)
+print(b)
+c=complex('5')
+print(c)
+--------
+(176+0j)
+(10.5+0j)
+(1+0j)
+(5+0j)
+[Finished in 0.2s]
+
+
+complex(x,y):
+------------
+
+c=complex('5')  # we cannot pass string in imaginary part
+print(c)
+
+
+s=complex(1,2)
+print(s)
+a=complex(10.5,5.5)
+print(a)
+b=complex(True,False)
+print(b)
+-------
+(1+2j)
+(10.5+5.5j)
+(1+0j)
+[Finished in 0.2s]
+
+
+28. Type Casting: bool() and str() functions:
+===============================================
+bool: total value is 0 it is False others True
+----
+
+s=bool(10)
+print(s)
+a=bool(10.5)
+print(a)
+b=bool(0)
+print(b)
+c=bool(0+0j)
+print(c)
+d=bool(1.5+2.5j)
+print(d)
+f=bool('yes')
+print(f)
+g=bool('')
+print(g)
+h=bool('False')
+print(h)
+-----
+True
+True
+False
+False
+True
+True
+False
+True
+[Finished in 0.2s]
+
+str:
+----
+s=str(10)
+print(s)
+a=str(10.5)
+print(a)
+b=str(0)
+print(b)
+c=str(0+0j)
+print(c)
+d=str(1.5+2.5j)
+print(d)
+f=str('yes')
+print(f)
+------------
+10
+10.5
+0
+0j
+(1.5+2.5j)
+yes
+[Finished in 0.2s]
+
+29. Type Casting: Summary:
+==========================
+30. Fundamental Data Types vs Immutability: Meaning of Immutability:
+====================================================================
+fundamental data types - int, float, complex, bool, str
+Mutable ---> Changeable
+Immutable --> Non Changeable
+
+- Once we create an object, we cannot perform any changes in that object
+If we are trying to perform any changes, with those changes, 
+a new object will be creted.
+
+s=10
+print(s)
+print(id(s))
+s=s+1
+print(s)
+print(id(s))
+---------
+10
+140728405884256
+11
+140728405884288
+[Finished in 0.1s]
+
+
+x=10
+y=x
+print(x,y)
+print(id(x))
+print(id(y))
+y=y+1
+print(id(y))
+print(y)
+------
+10 10
+140728405884256
+140728405884256
+140728405884288
+11
+[Finished in 0.1s]
+
+
+31. Fundamental Data Types vs Immutability:Need of Immutability:
+================================================================
+- Memory utilization will increase
+- performance will also improved
+
+x=10
+y=10
+z=10
+print(x,y,z)
+print(id(x))
+print(id(y))
+print(id(z))
+print(x is y)
+------
+10 10 10
+140728405884256
+140728405884256
+140728405884256
+True
+[Finished in 0.1s]
+
+- string also same
+
+x=True
+y=True
+z=False
+print(x,y,z)
+print(id(x))
+print(id(y))
+print(id(z))
+print(x is y)
+print(x is z)
+------
+True True False
+140728405381648
+140728405381648
+140728405381680
+True
+False
+[Finished in 0.1s]
+
+32. Immutability vs Mutability:
+===============================
+-object reusable concept is not applicable for complex data type
+
+-> IDLE and Python Console are REPL Tools
+    REPL - Read Evalve Print Loop
+
+
+l=[1,2,3,4]
+print(id(l))
+print(l)
+l[0]=777
+print(id(l))
+print(l)
+
+l1=[10,20,30,40]
+l2=l1
+print(l1)
+print(l2)
+l1[0]=5555
+print(id(l1))
+print(id(l2))
+print(l1)
+print(l2)
+l2[2]=8888
+print(l1)
+print(l2)
+----------
+2071078916616
+[1, 2, 3, 4]
+2071078916616
+[777, 2, 3, 4]
+[10, 20, 30, 40]
+[10, 20, 30, 40]
+2071110267656
+2071110267656
+[5555, 20, 30, 40]
+[5555, 20, 30, 40]
+[5555, 20, 8888, 40]
+[5555, 20, 8888, 40]
+[Finished in 0.1s]
+
+
+33. Python Data Types: List data type:
+======================================
+Collection related data types:
+------------------------------
+list
+tuple
+set
+frozenset
+dict
+range
+bytes
+bytearray
+
+1. List:
+--------
+Oreder is important and duplicates are allowed, we use list
+[1,2,3] ---> list
+(1,2,3) ---> tuple
+{1,2,3} ---> set
+{1:'durga',2:'ravi'} ---> dict
+
+
+l = [10,'durga',2,3,10,4]
+print(type(l))
+print(l)
+--------
+l = [10,'durga',2,3,10,4]
+print(type(l))
+print(l)
+
+1. order preserved
+2. duplicate objects are allowed
+3. [ ]
+4.  Heterogeneous objects are allowed
+5. Indexing and slicing 
+6. Growable in nature
+7. Mutable
+
+l = [10,'durga',2,3,10,4]
+print(type(l))
+print(l)
+print(l[1])
+print(l[-1])
+print(l[1:4])  #list of elements from 1 index to (4-1) index
+----
+<class 'list'>
+[10, 'durga', 2, 3, 10, 4]
+durga
+4
+['durga', 2, 3]
+[Finished in 0.3s]
+
+
+-----
+l=[]
+l.append(10)
+l.append(20)
+l.append(30)
+l.append(40)
+print(l)
+l.remove(30)
+print(l)
+----
+[10, 20, 30, 40]
+[10, 20, 40]
+[Finished in 0.1s]
+
+
+34. Python Data Types: Tuple data type:
+=======================================
+- Exactly same as list except that it is immutable
+- Ready only version of list is Tuple
+- append and remove attribute are not available in tuple
+
+t=(1,2,3,3,4)
+print(type(t))
+print(t[0])
+print(t[1:4])
+------
+<class 'tuple'>
+1
+(2, 3, 3)
+[Finished in 0.1s]
+
+
+t=()
+t=(10,)
+print(type(t))
+------
+<class 'tuple'>
+[Finished in 0.2s]
+
+
+list		Tuple
+----		----
+1. Mutable	1. Immutable
+2. []		2. ( )
+3. more memory  3. Less Memory
+4. Performance  4. Faster Access(performace is more)
+   less
+		5. savings,current account, rs.5,rs.10
+
+			
+35. Python Data Types: Set data type:
+=====================================
+- Duplicates are not allowed
+- Order not required
+- Index and slicing concepts are not applicable in set - s[0], s[1:4]
+- Hetrerogenous objects are allowed
+- Growable and set is mutable
+
+s={1,2,3,4,3,'durag'}
+print(s)
+print(type(s))
+s.add(50)
+print(s)
+s.remove(4)
+print(s)
+-----
+{1, 2, 3, 4, 'durag'}
+<class 'set'>
+{1, 2, 3, 4, 'durag', 50}
+{1, 2, 3, 'durag', 50}
+[Finished in 0.1s]
+
+
+append() vs add():
+------------------
+append means add at last
+add means add any where in the data
+
+
+s={ }
+print(s)
+print(type(s))
+
+s1=set()
+print(type(s1))
+-----
+{}
+<class 'dict'>
+<class 'set'>
+[Finished in 0.2s]
+
+
+list		set
+----		----
+1. order		1. order not required
+2. duplicates allowed   2. duplicates not allowed
+3. []			3. {}
+
+
+36. Python Data Types: FrozenSet:
+=================================
+- it is same as set but it is immutable
+- no add or remove attrinute
+
+s={1,2,3,4 }
+print(s)
+print(type(s))
+s.add(50)
+print((s))
+
+f = {10,20,30,40}
+fs = frozenset(f)
+print(type(fs))
+-----
+{1, 2, 3, 4}
+<class 'set'>
+{1, 2, 3, 4, 50}
+<class 'frozenset'>
+[Finished in 0.2s]
+
+
+tuple				frozenset
+-----				---------
+1. order preserved		1. order not applicable
+2. Duplicates are allowed	2. Duplicates are not allowed
+3. index, slice aplicable	3. index, slice not applicable
+
+
+37. Python Data Types: Dict(Dictionary):
+========================================
+- duplicate keys are not allowed but values are allowed
+- order not applicable
+- Heterogeneous objects are allowed
+- Mutable
+- Index and slicing are not applicable
+
+Key - value pairs
+rollno - name
+mobile no - address
+
+d={key:value}
+ ={k1:v1,k2:v2,k3:v3}
+
+
+d={1:'durga',2:'sunny',3:'chinny'}
+print(type(d))
+print(d)
+
+c={}
+c[100]='aaaaa'
+c[200]='bbbbb'
+print(c)
+c[100]='ccccc'
+print(c)
+----------
+<class 'dict'>
+{1: 'durga', 2: 'sunny', 3: 'chinny'}
+{100: 'aaaaa', 200: 'bbbbb'}
+{100: 'ccccc', 200: 'bbbbb'}
+[Finished in 0.1s]
+
+38. Python Data types: range:
+=============================
+r=range(10)
+print(r)
+print(type(r))
+
+for x in r:
+	print(x)
+-------
+range(0, 10)
+<class 'range'>
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+[Finished in 0.1s]
+
+form-1: range(n)
+-------
+	from 0 to n-1
+r=range(10)=0 to 9
+r=range(100)=0 to 99
+
+form-2:range(begin,end)
+-----------------------
+	begin to end-1
+r=range(1,10) 1 to 9
+
+r=range(1,11)
+print(r)
+print(type(r))
+
+for x in r:
+	print(x)
+-----
+range(1, 11)
+<class 'range'>
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+[Finished in 0.2s]
+
+ 
+form-3: range(begin,end,increment/decrement):
+---------------------------------------------
+- range is immutable
+
+r=range(1,21,2)
+
+r=range(1,11,2)
+print(r)
+print(type(r))
+
+for x in r:
+	print(x)
+--------
+range(1, 11, 2)
+<class 'range'>
+1
+3
+5
+7
+9
+[Finished in 0.1s]
+
+
+r=range(30,11,-5)
+print(r)
+print(type(r))
+
+for x in r:
+	print(x)
+---------
+range(30, 11, -5)
+<class 'range'>
+30
+25
+20
+15
+[Finished in 0.2s]
+
+- sequence
+- range(10)
+- order, index, slice
+- immutable
+
+39. Python Data Types: bytes abd bytearray:
+===========================================
+byte:
+----
+
+l=[1,2,3,4]
+b=bytes(l)
+print(type(b))
+print(b)
+for x in b:
+	print(x)
+--------
+
+<class 'bytes'>
+b'\x01\x02\x03\x04'
+1
+2
+3
+4
+[Finished in 0.2s]
+
+
+1. values only from 0 to 255
+2. immutable
+
+bytearray:
+---------
+l=[1,2,3,4]
+b=bytearray(l)
+print(b[0])
+print(b[-1])
+print(type(b))
+-----
+1
+4
+<class 'bytearray'>
+[Finished in 0.3s]
+
+-it is mutable
+
+40. Python Data types summary:
+==============================
+41. None Data Types:
+====================
+- None means nothing, no value associated
+- To make an object as garbage collections
+
+
+def f1():
+	return 10
+x=f1()
+print(x)
+
+def f2():
+	print("Hello")
+y=f2()
+print(y)
+-----
+10
+Hello
+None
+[Finished in 0.1s]
+
+
+a=None
+print(a)
+print(type(a))
+print(id(a))
+----
+None
+<class 'NoneType'>
+140728405428240
+[Finished in 0.1s]
+
+
+42. Escape Characters, Comments and Constants:
+==============================================
+- escape characters:
+--------------------
+\n    -  new line
+\t    -  Horizontal tab
+\r    -  Carriage return
+\b    -  Back space
+\f    -  Form feed
+\'    -  Single quote
+\"    -  Double quote
+\\    -  Backslash    ------- file location
+
+print('durga\nsoftware')
+print('durga\tsoftware')
+print('durga\rsoftware')
+print('durga\bsoftware')
+print('durga\fsoftware')
+print('durga\'software')
+print('durga \"software')
+print('durga \\ software')
+-----------
+durga
+software
+durga	software
+durga
+software
+durgasoftware
+durgasoftware
+durga'software
+durga "software
+durga \ software
+[Finished in 0.2s]
+
+
+- Comments:
+-----------
+//This is single line comment//   in JAVA
+/*...............*/
+
+
+in python
+# This is single line comment
+There is no multiline comment
+'''..................''' - Doc string
+
+Constants in python:
+---------------------
+It is not applicable in python
+
+MAX_LENGTH=10
+
+
+47. Agenda & Difference b/n raw_input() and input() functions:
+==============================================================
+raw_input() --> it is always going to provide STRING type only
+input --> Not required to perform type casting
+These two functions are applicable only in python-2.x
+Input() funcation only applicable in python-3.x
+	. it will consider all as string
+
+x=input('Eneter value')
+y=int(x)
+print(type(x))
+print(type(y))
+print(x)
+print(y)
+-----
+C:\Users\Administrator\Desktop\pythonscripts>py python.py
+Eneter value10
+<class 'str'>
+<class 'int'>
+10
+10
+
+48. Demo program-1 to Read input data from the keyboard:
+========================================================
+x=input('enter first number: ')
+y=input('enter second number: ')
+i=int(x)
+j=int(y)
+print('the sum :', i+j)
+---
+C:\Users\Administrator\Desktop\pythonscripts>py python.py
+enter first number: 10
+enter second number: 20
+the sum : 30
+
+
+x=int(input('enter first number: '))
+y=int(input('enter second number: '))
+print('the sum :', x+y)
+-------
+C:\Users\Administrator\Desktop\pythonscripts>py python.py
+enter first number: 5
+enter second number: 6
+the sum : 11
+
+print('the sum :', int(input('enter first number: '))+
+	int(input('enter second number: ')))
+-------------
+C:\Users\Administrator\Desktop\pythonscripts>py python.py
+enter first number: 34
+enter second number: 345
+the sum : 379
+
+49. Demo program-2 to read input data from the keyboard:
+====================================================
+write a program to read employee data from the keyboard and print that data:
+---------------------------------------------------------------------------
+eno = int(input("Enter Emp No:"))
+ename = input("Enter Emp Name:")
+esal = float(input("Enter Emp Salary"))
+eaddress = input("Enter Emp address: ")
+married = bool(input("Emp Married? [True/False]:"))
+print("confirm data")
+print("Emp No:", eno)
+print("Emp Name:", ename)
+print("Emp Salary", esal)
+print("Emp address", eaddress)
+print("Emp Married?", married)
+---
+C:\Users\Administrator\Desktop\pythonscripts>py python.py
+Enter Emp No:101
+Enter Emp Name:Durga
+Enter Emp Salary70000
+Enter Emp address: Hyd
+Emp Married? [True/False]:True
+confirm data
+Emp No: 101
+Emp Name: Durga
+Emp Salary 70000.0
+Emp address Hyd
+Emp Married? True
+
+
+eno = int(input("Enter Emp No:"))
+ename = input("Enter Emp Name:")
+esal = float(input("Enter Emp Salary"))
+eaddress = input("Enter Emp address: ")
+married = eval(input("Emp Married? [True/False]:"))
+print("confirm data")
+print("Emp No:", eno)
+print("Emp Name:", ename)
+print("Emp Salary", esal)
+print("Emp address", eaddress)
+print("Emp Married?", married)
+-----
+C:\Users\Administrator\Desktop\pythonscripts>py python.py
+Enter Emp No:101
+Enter Emp Name:Durga
+Enter Emp Salary70000
+Enter Emp address: Hyd
+Emp Married? [True/False]:False
+confirm data
+Emp No: 101
+Emp Name: Durga
+Emp Salary 70000.0
+Emp address Hyd
+Emp Married? False
+
+50. Reading Multiple Values from the keyboard in a single line:
+===============================================================
+- List comprehension string:
+---------------------------
+a,b=[int(x) for x in input('enter 2 numbers').split()]
+print('The sum:', a+b)
+----
+C:\Users\Administrator\Desktop\pythonscripts>py python.py
+enter 2 numbers5 6
+The sum: 11
+
+
+#a,b=[int(x) for x in input('enter 2 numbers').split()]
+#print('The sum:', a+b)
+s=input('enter 2 numbers')
+l=s.split()
+l1 = [int(x) for x in l]
+print(l1)
+a,b = l1
+print(a)
+print(b)
+print("sum of a and b:", a+b)
+----
+C:\Users\Administrator\Desktop\pythonscripts>py python.py
+enter 2 numbers1 2
+[1, 2]
+1
+2
+sum of a and b: 3
+
+
+a,b,c=[float(x) for x in input('enter 3 float values with:').split(',')]
+print("The sum is:", a+b+c)
+----------------
+C:\Users\Administrator\Desktop\pythonscripts>py python.py
+enter 3 float values with:2,3,4
+The sum is: 9.0
+
+
+51. eval() function:
+====================
+x=eval(input('enter something:'))
+print(type(x))
+---
+C:\Users\Administrator\Desktop\pythonscripts>py python.py
+enter something:'dasfsf'
+<class 'str'>
+
+C:\Users\Administrator\Desktop\pythonscripts>py python.py
+enter something:1
+<class 'int'>
+
+C:\Users\Administrator\Desktop\pythonscripts>py python.py
+enter something:2.3
+<class 'float'>
+
+C:\Users\Administrator\Desktop\pythonscripts>py python.py
+enter something:[1,2,]
+<class 'list'>
+
+
+x=eval('1+2+3')
+print(x,type(x))
+-----
+6 <class 'int'>
+[Finished in 0.1s]
+
+
+52. Command Line Arguments part-1:
+==================================
+sys - module
+argv - variable - these are list type
+
+from sys import argv
+print(type(argv))
+---------
+<class 'list'>
+[Finished in 0.2s]
+
+from sys import argv
+print(argv[0])
+print(argv[1])
+print(argv[2])
+----
+C:\Users\Administrator\Desktop\pythonscripts>py python.py 10 20 30
+python.py
+10
+20
+
+# program to print command line arguments information:
+------------------------------------------------------
+from sys import argv
+print('print no.of cmd line arguments :', len(argv))
+print('The list of cmd line arguments :', argv)
+print('The cmd line arguments one by one:')
+#print('print no.of cmd line arguments :', len(argv))
+for x in argv:
+	print(x)
+-----
+C:\Users\Administrator\Desktop\pythonscripts>py python.py 10 20 30
+print no.of cmd line arguments : 4
+The list of cmd line arguments : ['python.py', '10', '20', '30']
+The cmd line arguments one by one:
+python.py
+10
+20
+30
+
+
+53. Command Line Arguments Part-2:
+==================================
+#program to print sum of given  numbers provided as cmd line arguments:
+-----------------------------------------------------------------------
+from sys import argv
+args=argv[1:]
+sum=0
+for x in args:
+	sum=sum+int(x)
+	print('The sum is:', sum)
+------
+C:\Users\Administrator\Desktop\pythonscripts>py python.py 10 20 30 40
+The sum is: 10
+The sum is: 30
+The sum is: 60
+The sum is: 100
+
+
+#File merger application:
+-------------------------
+f1=open('file1.txt')
+f2=open('file2.txt')
+f3=open('file3.txt','w')
+for x in f1:
+	f3.write(x)
+for x in f2:
+	f3.write(x)
+	
+-----
+f1=open(argv[1])
+f2=open(argv[2])
+f3=open(argv[3],'w')
+for x in f1:
+	f3.write(x)
+for x in f2:
+	f3.write(x)
+
+
+
+54. Import Coclusions about command line arguments:
+===================================================
+from sys import argv
+print(argv[1])
+---
+C:\Users\Administrator\Desktop\pythonscripts>py python.py "10 20" 30 40
+10 20
+
+
+from sys import argv
+print(int(argv[1])+int(argv[2]))
+--------------------------------
+C:\Users\Administrator\Desktop\pythonscripts>py python.py 10 20
+30
+
+from sys import argv
+print(argv[100])
+- Index error-out of range
+
+
+55. Output Statements:print() funcation and sep attribute:
+==========================================================
+1. print() - without any argument:
+==================================
+print('duga')
+print()
+print('soft')
+---
+duga
+
+soft
+[Finished in 0.1s]
+
+2. print(string):
+=================
+print('duga\nsoftware')
+print('duga\tsoftware')
+-----
+duga
+software
+duga	software
+[Finished in 0.1s]
+
+3. variable number of args 
+a,b,c=1,2,3
+print("values are", a,b,c)
+---
+values are 1 2 3
+[Finished in 0.2s]
+
+
+4. sep attribute:
+------------------
+a,b,c,d=1,2,3,4
+print(a,b,c,d)
+print(a,b,c,d,sep=':')
+print(a,b,c,d,sep='-')
+----
+1 2 3 4
+1:2:3:4
+1-2-3-4
+[Finished in 0.2s]
+
+
+56. Output Statements: end attribute:
+=====================================
+print('hello',end='')
+print('durga',end='')
+print('soft')
+----
+hellodurgasoft
+[Finished in 0.2s]
+
+
+print('hello',end='::')
+print('durga',end='***')
+print('soft')
+---
+hello::durga***soft
+[Finished in 0.2s]
+
+
+print(1,2,3,sep=':',end='***')
+print(4,5,6,sep=':')
+print(7,8,end='$$')
+print(9)
+-----
+1:2:3***4:5:6
+7 8$$9
+[Finished in 0.3s]
+
+
+print('durga'+'soft')
+print('durga','soft')
+---
+durgasoft
+durga soft
+[Finished in 0.1s]
+
+57. Print(object) and with replacement operator:
+================================================
+l=[1,2,3,4]
+print(l)
+t=(1,2,3,4)
+print(t)
+---
+[1, 2, 3, 4]
+(1, 2, 3, 4)
+[Finished in 0.2s]
+
+
+- print() with replacement operator {}:
+---------------------------------------
+name='mahesh'
+salary=10000
+gf='sunny'
+
+print('Hello {}, your salary is {} and your friend {} is waiting'.format(name,salary,gf))
+print('Hello {0}, your salary is {1} and your friend {2} is waiting'.format(name,salary,gf))
+--
+Hello mahesh, your salary is 10000 and your friend sunny is waiting
+Hello mahesh, your salary is 10000 and your friend sunny is waiting
+[Finished in 0.1s]
+
+a,b,c,d=1,2,3,4
+print('a={},b={},c={},d={}'.format(a,b,c,d))
+---
+a=1,b=2,c=3,d=4
+[Finished in 0.1s]
+
+
+58. Print() with formatted string:
+==================================
+%i = signed decimal value
+%d = signed decimal value
+%f = signed float value
+%s = string, any other objects like list,set...
+
+
+a=10
+b=20
+c=30
+print('a=%d, b=%d, c=%d' %(a,b,c))
+
+#print('formatted string' %(variable list))
+--
+a=10, b=20, c=30
+[Finished in 0.1s]
+
+
+
+price = 70.56789
+print('price value={}'.format(price))
+print('price value=%f' %price)
+print('price value=%.2f' %price)
+----
+price value=70.56789
+price value=70.567890
+price value=70.57
+[Finished in 0.2s]
+
+
+Python Exception Handling:
+==========================
+59. Syntax Error vs Runtime Error:
+==================================
+1. Syntax error 
+
+- The errors which occurs because of invalid syntax, such type of errors are considered as syntax errors.
+- Programmer is responsible to correct these syntax errors. Once all syntax errors
+  are corrected, then only program execution will be started
+
+2. Runtime error
+
+- Also known as Exceptions.
+- While executing the program, at runtime if something goes wrong because of end user input,
+  memory problems, programming logic etc., then we will get runtime error.
+- Exception Handling concept applicable for runtime errors but not for syntax errors.
+
+
+x=10
+if x==10:
+	print('x value:', x)
+
+print('Hello World')
+--
+x value: 10
+Hello World
+[Finished in 0.1s]
+
+2. Runtime errors: - Exceptions:
+--------------------------------
+ZeroDivisionError:
+ValueError:
+FileNotFoundError:
+
+x=int(input('enter first number'))
+y=int(input('enter second number'))
+print('the result:', x/y)
+----
+C:\Users\Administrator\Desktop\pythonscripts>py python.py
+enter first number1
+enter second number0
+Traceback (most recent call last):
+  File "python.py", line 3, in <module>
+    print('the result:', x/y)
+ZeroDivisionError: division by zero
+
+C:\Users\Administrator\Desktop\pythonscripts>py python.py
+enter first numberten
+Traceback (most recent call last):
+  File "python.py", line 1, in <module>
+    x=int(input('enter first number'))
+ValueError: invalid literal for int() with base 10: 'ten'
+
+
+
+f=open('xyzxyz.txt')
+print(f.read())
+-----
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\pythonscripts\python.py", line 1, in <module>
+    f=open('xyzxyz.txt')
+FileNotFoundError: [Errno 2] No such file or directory: 'xyzxyz.txt'
+[Finished in 0.2s]
+
+
+60. The 3 most important questions about exception handling:
+============================================================
+1. What is an Exception
+
+ - An unwanted and unexpected event that distrubs normal flow of program is called Exception.
+eg:
+Internet error
+Sleeping error
+Tyrepuncture error
+FileNotFounderror
+ZeroDiviionerror
+Valueerror
+   
+2. What is the main objective og Exception Handling
+
+- Graceful termination of a process
+- The main objective of exception handling is Graceful Termination/Normal Termination
+  of the application(i.e we should not block our resources and we should not miss anything)
+
+open db connection
+Read data from database
+use that data
+close db connection
+
+3. What is the meaning of Exception Handling
+
+- Exception handling does not mean repairing an exception. we have to define alternative 
+  way to continue rest of the program normaly.
+- This way of defining alternative is nothing but exception handling.
+
+try:  (main code)
+  Read data from Remote file
+  licating at London file
+Except FileNotFoundError: (Alternative code)
+  Use local file and continue
+  rest of the programm normally
+
+61. Default Exception Handling and Exception Hierarchy:
+=======================================================
+- Abnormal termination/non-graceful termination
+- Every exception in python is an object. For every exception type the corresponding calss is available.
+- Whenever an exception occurs PVM will create the corresponding exception object and will check for handling code.
+  If handling code is available then it will be executed and rest of the program will be executed normally.
+- If handling code is not available then PVM will terminates program abnormally and print corresponding exception
+  information to the console. The rest of the program won't be executed.
+- To prevent this abnormal termination, we should handle exception explicitly.
+  of course by using try-except blocks.
+
+
+Base Exception -
+ 1. Exception - 
+      . Arthimetic error   	. LookupError	  . OSerror
+        - ZeroDivisionError        - IndexError      - FileNotFoundError
+        - Overflowerror            - KeyError        - InterruptedError
+        - Floatingpointerror 			     - TimeoutError
+						     - Permission Error
+
+      . AttributeError 	. EOFError  .NameError  .TypeError  .ValueError
+
+ 2. Systemexit  				     	
+ 3. Generatorexit
+ 4. Keyboard inturrept
+
+62. Customized Exception Handling by using try-except:
+======================================================
+- It is highly recommended to handle exceptions.
+- The code which may raise an exception is called Risky Code and we have to take
+  that risky code inside try block
+- The corresponding handling code we have to take inside except block.
+
+without try-except:
+-------------------
+print('hello')
+print(10/0)
+print('hi')
+----
+hello
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\pythonscripts\python.py", line 2, in <module>
+    print(10/0)
+ZeroDivisionError: division by zero
+[Finished in 0.2s]
+
+Abnormal termination
+Non-Graceful termination
+
+
+with try-except:
+----------------
+risky code
+try - risky code (where the exception raise)
+    
+try:
+  Risky code
+except:
+  Handling code/Alternative code
+
+
+
+print('hello')
+try:
+	print(10/0)
+except ZeroDivisionError:
+	print(10/2)
+
+print('hi')
+------
+hello
+5.0
+hi
+[Finished in 0.1s]
+
+Normal/Graceful Termination
+
+63. Control flow in try-except:
+===============================
+try:
+  statement-1
+  statement-2
+  statement-3
+except xxx:
+  statement-4
+
+statement-5
+
+
+1. If there is no exception:
+-------------
+ 1,2,3,5,NT
+
+2. If an exception raised at statement-2 and corresponding except block matched:
+----
+ 1,4,5,NT
+
+3. If an exception is raised at statement-2, but correspondent except block not matched?
+--------------
+ 1, AT
+
+4. If exception raised at statement-4 or stmet-5
+----
+ 1,2,3,AT
+
+
+64. How to print Exception Information to the console?
+======================================================
+try:
+	print(10/0)
+except ZeroDivisionError as msg:
+	print('The type of exception:', type(msg))
+	print('The type of exception:', msg.__class__)
+	print('The exception class name:', msg.__class__.__name__)
+	print('Description of exception:', msg)
+-----------
+The type of exception: <class 'ZeroDivisionError'>
+The type of exception: <class 'ZeroDivisionError'>
+The exception class name: ZeroDivisionError
+Description of exception: division by zero
+[Finished in 0.2s]
+
+
+try:
+	x=int(input('enter first value:'))
+	y=int(input('enter second value:'))
+	print('The result:',x/y)
+
+except BaseException as msg:
+	print('The type of exception:', type(msg))
+	print('The type of exception:', msg.__class__)
+	print('The exception class name:', msg.__class__.__name__)
+	print('Description of exception:', msg)
+
+----
+C:\Users\Administrator\Desktop\pythonscripts>py python.py
+enter first value:2
+enter second value:0
+The type of exception: <class 'ZeroDivisionError'>
+The type of exception: <class 'ZeroDivisionError'>
+The exception class name: ZeroDivisionError
+Description of exception: division by zero
+
+65. try with multiple except blocks?:
+=====================================
+try:
+ -----
+ -----
+ -----
+except ZeroDivisionError:
+  Perform alternative arithmetic operations
+except FileNotFoundError:
+  Use local file instead of remote file
+
+try:
+	x=int(input('enter first value:'))
+	y=int(input('enter second value:'))
+	print('The result:',x/y)
+
+except ZeroDivisionError:
+	print('cannot divide with zero')
+except ValueError:
+	print('please provide int value only')
+	
+-------
+C:\Users\Administrator\Desktop\pythonscripts>py python.py
+enter first value:2
+enter second value:0
+cannot divide with zero
+
+C:\Users\Administrator\Desktop\pythonscripts>py python.py
+enter first value:2
+enter second value:three
+please provide int value only
+
+
+try:
+	x=int(input('enter first value:'))
+	y=int(input('enter second value:'))
+	print('The result:',x/y)
+except ArithmeticError:
+	print('ArithmeticError')
+except ZeroDivisionError:
+	print('ZeroDivisionError')
+---
+C:\Users\Administrator\Desktop\pythonscripts>py python.py
+enter first value:1
+enter second value:0
+ArithmeticError
+
+66. Single except block that can handle multiple different exceptions:
+======================================================================
+try:
+	x=int(input('enter first value:'))
+	y=int(input('enter second value:'))
+	print('The result:',x/y)
+
+except (ZeroDivisionError,ValueError) as msg:
+	print('Exception name:', msg.__class__.__name__)
+	print('Desctiption of exception:', msg)
+	print('Please provide valid input only')
+---------
+C:\Users\Administrator\Desktop\pythonscripts>py python.py
+enter first value:2
+enter second value:0
+Exception name: ZeroDivisionError
+Desctiption of exception: division by zero
+Please provide valid input only
+
+
+67. Default Except Block & Various except block syntaxes:
+=========================================================
+- We can use default except block to handle any type of exceptions
+- In default except block, generally we can print exception info. to the console.
+
+syntax:
+except:
+  statements
+
+
+try:
+	x=int(input('enter first value:'))
+	y=int(input('enter second value:'))
+	print('The result:',x/y)
+
+except ZeroDivisionError:
+	print('ZeroDivisionError')
+except:
+	print('Default block: Please provide valid input only')
+--------
+C:\Users\Administrator\Desktop\pythonscripts>py python.py
+enter first value:1
+enter second value:0
+ZeroDivisionError
+
+C:\Users\Administrator\Desktop\pythonscripts>py python.py
+enter first value:1
+enter second value:vdvd
+Default block: Please provide valid input only
+
+
+try:
+	x=int(input('enter first value:'))
+	y=int(input('enter second value:'))
+	print('The result:',x/y)
+
+except:
+	print('Default block: Please provide valid input only')
+except ZeroDivisionError:
+	print('ZeroDivisionError')
+------------
+  File "C:\Users\Administrator\Desktop\pythonscripts\python.py", line 4
+    print('The result:',x/y)
+                         ^
+SyntaxError: default 'except:' must be last
+[Finished in 0.2s]
+
+
+Various possible combinations of except blocks:
+-----------------------------------------------
+1. except ZeroDivisionError:
+2. except (ZeroDivisionError):
+3. except ZeroDivisionError as msg:
+4. except (ZeroDivisionError) as msg:
+5. except (ZeroDivisionError,ValueError):
+6. except (ZeroDivisionError,ValueError) as msg:
+7. except:
+
+Invalid syntax excepts:
+-----------------
+8. except (ZeroDivisionError as msg):
+9. except ZeroDivisionError,ValueError:
+10.except (ZeroDivisionError,ValueError as msg):
+
+68.Finally block purpose and Specialty:
+=======================================
+try:
+ open db connection
+ Read data from db
+ close db connection  - Resource Deallocation code (or)
+			Cleanup code
+except:
+ Handling code
+
+
+
+try:
+ Risky code
+except:
+ Handling code
+finally:
+ cleanup code
+
+
+case-1: If no exception:
+------------------------
+try:
+ print('try')
+except:
+ print('except')
+finally:
+ print('finally')
+
+o/p- try,finally
+
+case-2: If exception raised and handled:
+----------------------------------------
+try:
+ print('try')
+ print(10/0)
+except ZeroDivisionError:
+ print('except')
+finally:
+ print('finally')
+------
+try
+except
+finally
+[Finished in 0.1s]
+
+case-3: If exception raised but not-handled:
+---------------------------------------------
+try:
+ print('try')
+ print(10/0)
+except ValueError:
+ print('except')
+finally:
+ print('finally')
+----
+try
+finally
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\pythonscripts\python.py", line 3, in <module>
+    print(10/0)
+ZeroDivisionError: division by zero
+[Finished in 0.2s]
+
+69. Finally block vs OS._exit(0):
+=================================
+if power off in between execution of code - PVM exit
+OS - module
+os._exit(0)
+
+
+import os
+try:
+ print('try')
+ os._exit(0)		#0=status code
+except ValueError:	 0=Normal terminate 
+ print('except')         non-zero=Abnormal termination
+finally:
+ print('finally')
+----
+try
+[Finished in 0.3s]
+
+
+70. Important interview questions:difference b/n finally block and destructor:
+==============================================================================
+finally block vs Destructor:
+----------------------------
+- finally block meant for maintaining cleanup code. for try:block
+- Destructor meant for maintaining cleanup code. for related object
+
+- finally block meant for cleanup activities related to try block.
+  .i.e., whatever resources we opened as the part of try block will be 
+  closed inside finally block.
+- Destructor meant for cleanup activities related to object.
+  what ever resources allocated with the object should be allocated inside
+  destructor, which will be executed before destroying object.
+
+71. Control Flow in try-except-finally:
+=======================================
+try:
+ st-1
+ st-2
+ st-3
+except:
+ st-4
+finally:
+ st-5
+st-6
+
+case-1: If no exception:
+------------------------
+st-1,2,3,5,6,NT
+
+case-2: If exception raised in st-2 and handled:
+-----------------------------------------------
+st - 1,4,5,6,NT
+
+case-3: If exception raised in st-2 but not-handled:
+----------------------------------------------------
+st - 1,5,AT
+
+case-4: If exception raised in st-4:
+-------------------------------------
+st-5,AT
+
+case-5: If exception raised in st-5 or st-6:
+--------------------------------------------
+st-AT
+
+72. Nested try-except-finally theory and demo program:
+======================================================
+try:
+ try:
+   ---
+ except:
+   ---
+ finally:
+   ---
+
+except:
+  try:
+   ---
+  except:
+   ---
+  finally:
+   -----
+
+fianlly:
+ try:
+   ---
+ except:
+   ---
+ finally:
+   ---
+ 
+
+try:
+   use Oracle database
+except:
+     try:
+	use mysql database
+     except:
+        use postgreSQL
+
+
+try:
+	print('outer try block')
+	try:
+		print('Inner try block')
+		#print(10/0)
+	except ZeroDivisionError:
+		print('Inner except block')
+	finally:
+		print('Inner finally block')
+except:
+	print('outer except block')
+finally:
+	print('outer finally block')
+---
+outer try block
+Inner try block
+Inner finally block
+outer finally block
+[Finished in 0.2s]
+
+
+try:
+	print('outer try block')
+	try:
+		print('Inner try block')
+		print(10/0)
+	except ZeroDivisionError:
+		print('Inner except block')
+	finally:
+		print('Inner finally block')
+except:
+	print('outer except block')
+finally:
+	print('outer finally block')
+-----
+outer try block
+Inner try block
+Inner except block
+Inner finally block
+outer finally block
+[Finished in 0.2s]
+
+
+try:
+	print('outer try block')
+	try:
+		print('Inner try block')
+		print(10/0)
+	except ValueError:
+		print('Inner except block')
+	finally:
+		print('Inner finally block')
+except:
+	print('outer except block')
+finally:
+	print('outer finally block')
+-------
+outer try block
+Inner try block
+Inner finally block
+outer except block
+outer finally block
+[Finished in 0.1s]
+
+try:
+	print('outer try block')
+	print(10/0)
+	try:
+		print('Inner try block')
+		
+	except ValueError:
+		print('Inner except block')
+	finally:
+		print('Inner finally block')
+except:
+	print('outer except block')
+finally:
+	print('outer finally block')
+------
+outer try block
+outer except block
+outer finally block
+[Finished in 0.2s]
+
+
+73. Control Flow in Nested try-except-finally:
+==============================================
+try:
+	st-1,2,3
+	try:
+		st-4,5,6
+	except xxx:
+		st-7
+	finally:
+		st-8
+	st-9
+except yyy:
+	st-10
+finally:
+	st-11
+st-12
+
+
+case-1: If there is no exception:
+---------------------------------
+
+st-1,2,3,4,5,6,8,9,11,12,NT
+
+case-2: If exception raised in st-2 and handled:
+-----------------------------------------------
+st - 1,10,11,12,NT
+
+case-3: If exception raised in st-2 but not-handled:
+----------------------------------------------------
+st - 1,11,AT
+
+case-4: If exception raised in st-5 and inner except block matched:
+-------------------------------------------------------------------
+st-1,2,3,4,7,8,9,11,12,NT
+
+case-5: If exception raised in st-5 and inner except block not matched but outer except block matched:
+------------------------------------------------------------------------------------------------------
+st-1,2,3,4,8,10,11,12,NT
+
+case-6: If exception raised in st-5 and inner except block not matched but outer except block not matched:
+----------------------------------------------------------------------------------------------------------
+st-1,2,3,4,8,11,AT
+
+case-7:If exception raised in st-7 and corresponding except block matched:
+--------------------------------------------------------------------------
+st-1,2,3,(4,5,6),8,10,11,12,NT
+
+case-8:If exception raised in st-7 and corresponding except block not matched:
+------------------------------------------------------------------------------
+st-1,2,3,(4,5,6),8,11,AT
+
+case-9: If exception raised in st-8 and corresponding except block matched:
+--------------------------------------------------------------------------
+st-1,2,3,(4,5,6,7),10,11,12,NT
+
+case-10: If exception raised in st-8 and corresponding except block not matched:
+--------------------------------------------------------------------------------
+st-1,2,3,(4,5,6,7,),11,AT
+
+case-11: If exception raised in st-8 and corresponding except block matched:
+--------------------------------------------------------------------------
+st-1,2,3,(4,5,6,7),8,10,11,12,NT
+
+case-12: If exception raised in st-8 and corresponding except block not matched:
+--------------------------------------------------------------------------
+st-1,2,3,(4,5,6,7),8,11,AT
+
+case-13: if an exception raised at st-10:
+-----------------------------------------
+st-11,AT
+
+case-14: if an exception raised at st-11 or 12:
+-----------------------------------------------
+st-AT
+
+74. else block with try-except-finally theory:
+==============================================
+1. if-else ==> If condition is false then only else will be executed.
+2. for-else ==> If loop executed without break then only else will be executed
+3. while-else ==> If loop executed without break then only else will be executed
+
+1. if-else:
+-----------
+x=10
+if x>10:
+  print('x>10')
+else:
+ print('x is not x>10')
+---
+o/p: x is not x>10
+
+2. loops with else:
+-------------------
+for x in range(10):
+	print('the current item:',x)
+else:
+	print('congratulations all items processed successfully')
+----
+the current item: 0
+the current item: 1
+the current item: 2
+the current item: 3
+the current item: 4
+the current item: 5
+the current item: 6
+the current item: 7
+the current item: 8
+the current item: 9
+congratulations all items processed successfully
+[Finished in 0.1s]
+ 
+for x in range(10):
+	if x>5:
+		break
+	print('the current item:',x)
+else:
+	print('congratulations all items processed successfully')
+--------
+the current item: 0
+the current item: 1
+the current item: 2
+the current item: 3
+the current item: 4
+the current item: 5
+[Finished in 0.2s]
+
+- try-except-else-finally:
+--------------------------
+try:
+	Risky code
+except:
+	Handling code
+	It will be executed if exception in try block
+else:
+	It will be executed if there is no exception there is no exception
+	in try block
+finally:
+	cleanup code
+	it will be executed whether exception raised or not raised
+	whether exception handled or not handled
+
+75. else block with try-except-finally demo programs:
+=====================================================
+- There is no chance of executing both except and else simultaneously.
+- If we want to take else block, compulsory except block should be there.
+  i.e., else without except block is always invalid.
+  syntaxerror:invalid syntax
+
+try:
+	print('try')
+except:
+	print('except')
+else:
+	print('else')
+finally:
+	print('finally')
+------
+try
+else
+finally
+[Finished in 0.1s]
+
+
+try:
+	print('try')
+	print(10/0)
+except:
+	print('except')
+else:
+	print('else')
+finally:
+	print('finally')
+----
+try
+except
+finally
+[Finished in 0.2s]
+
+
+f=None
+try:
+	f=open('abc.txt','r')
+except:
+	print('some problem while locating/opening file')
+else:
+	print('file opened successfully')
+	print('the content of the file:')
+	print('#'*24)
+	print(f.read())
+finally:
+	if f is not None:
+		f.close()
+------
+file opened successfully
+the content of the file:
+########################
+Hi all,
+It is durga software
+can easly learn python
+[Finished in 0.1s]
+-----
+f=None
+try:
+	f=open('abcabc.txt','r')
+except:
+	print('some problem while locating/opening file')
+else:
+	print('file opened successfully')
+	print('the content of the file:')
+	print('#'*24)
+	print(f.read())
+finally:
+	if f is not None:
+		f.close()
+-------
+some problem while locating/opening file
+[Finished in 0.2s]
+
+
+76. Various possible combinations of try-except-else-finally:
+=============================================================
+ try:
+	print('try')
+finally:
+	print('finally')
+-----
+try
+finally
+[Finished in 0.2s]
+
+
+77. Types of Exceptions-Predefined and User Defined:
+====================================================
+1. Predefined exceptions - Python inbuild exception
+2. User defined exceptions
+ 
+1. Predefined exceptions - Python inbuild exception
+	print(10/0) - ZeroDivisionError
+	x=int('10')
+	x=int('ten') = ValueError
+- It is also known inbuilt exceptions or PVM Exceptions
+- These will be raised automatically by python virtual machine whenever a particular event occurs.
+
+2. User Defined Exceptions:
+---------------------------  
+Bank app:
+--------
+def withdraw(amount):
+	if amout >= balance:
+		raise InSuffientFundsException()
+	else:
+		process request
+
+
+2. mobile recharge app:
+-----------------------
+def recharge(pin):
+	if pin is not valid:
+		Raise InvalidPinException
+
+3. Kapu Matrimonial Application:(18-60 years)
+---------------------------------------------
+99: TooYoungException:
+	plz wait some more time
+12: TooOldException:
+	Your age already crossed
+
+- Also known as Customized Exceptions or Programmatic Exceptions.
+- Sometimes we have to define and raise exceptions explicitly to indicate that something
+  goes wrong, such type of exceptions are called user defined exceptions
+- Programmer is reposnsible to define these exceptions and PVM not having any idea
+  about these. Hence we have to raise explicitly based on our requirement by using
+  'raise' keyword.
+
+78. How to define and raise Customized Exceptions & Demo Program:
+=================================================================
+Base Exception -> Exception -> TooYoungException
+
+class TooYoungException(Exception):
+	def __int__(self,msg):
+		self.msg=msg
+
+- We can raise exception by using raise keyword.
+
+raise TooYoungException('plz wait some more time')
+
+- Every exception in python is a class and it should be child class of BaseException.
+
+
+class TooYoungException(Exception):
+	def __int__(self,msg):
+		self.msg=msg
+
+class TooOldException(Exception):
+	def __int__(self,msg):
+		self.msg=msg
+
+age=int(input('Enter Age:'))
+if age>60:
+	raise TooYoungException('Plz wait, definitly will get best match')
+elif age<18:
+	raise TooOldException('your age already crossed')
+else:
+	print('you will get match details soon by email')
+------------------
+C:\Users\Administrator\Desktop\pythonscripts>py dsoft.py
+Enter Age:99
+Traceback (most recent call last):
+  File "dsoft.py", line 11, in <module>
+    raise TooYoungException('Plz wait, definitly will get best match')
+__main__.TooYoungException: Plz wait, definitly will get best match
+
+C:\Users\Administrator\Desktop\pythonscripts>py dsoft.py
+Enter Age:12
+Traceback (most recent call last):
+  File "dsoft.py", line 13, in <module>
+    raise TooOldException('your age already crossed')
+__main__.TooOldException: your age already crossed
+
+C:\Users\Administrator\Desktop\pythonscripts>py dsoft.py
+Enter Age:25
+you will get match details soon by email
+
+
+Interview Questions:
+====================
+- Write a program to REVERSE content of the given string by using slice operator?
+----------------------------------------------------------------------------------
+1. Slice Operator:
+------------------
+s[begin:end:step]
+
+s='durga'
+output=s[ : : -1]
+print(output)
+-----
+agrud
+[Finished in 0.1s]
+
+s=input('Enter some string to reverse')
+output=s[ : : -1]
+print(output)
+--------
+C:\Users\Administrator\Desktop\pythonscripts>py dsoft.py
+Enter some string to reverseabcdefghijklmnopqrstuvwxyz
+zyxwvutsrqponmlkjihgfedcba
+
+2. Program To REVERSE content of the given string by using reversed() function:
+===============================================================================
+s=input('Enter some string to reverse:')
+r=reversed(s)
+for ch in r:
+	print(ch)
+----
+C:\Users\Administrator\Desktop\pythonscripts>py dsoft.py
+Enter some string to reverse:abcd
+d
+c
+b
+a
+
+s=input('Enter some string to reverse:')
+r=reversed(s)
+output=''.join(r)
+print(output)
+-------
+C:\Users\Administrator\Desktop\pythonscripts>py dsoft.py
+Enter some string to reverse:mahesh
+hseham
+
+3. Write a program to REVERSE content of the given string by using while loop:
+==============================================================================
+s=input('Enter some string to reverse:')
+output=''
+i=len(s)-1
+while i>=0:
+	output=output+s[i]
+	i=i-1
+print(output)
+----
+C:\Users\Administrator\Desktop\pythonscripts>py dsoft.py
+Enter some string to reverse:abcd
+dcba
+
+
+4. Write a program to REVERSE order of words present in the given string?
+=========================================================================
+input: Learning python is very easy
+output: easy very is python learning
+
+s='Learning python is very easy'
+l=s.split()
+print(l)
+l1=l[::-1]
+print(l1)
+output = ' '.join(l1)
+print(output)
+----
+['Learning', 'python', 'is', 'very', 'easy']
+['easy', 'very', 'is', 'python', 'Learning']
+easy very is python Learning
+[Finished in 0.2s]
+
+
+5. Write a program to REVERSE internal content of each word:
+============================================================
+s='Learning python is very easy'
+l=s.split()
+l1=[]
+for word in l:
+	l1.append(word[::-1])
+output = ' '.join(l1)
+print(output)
+-----
+gninraeL nohtyp si yrev ysae
+[Finished in 0.2s]
+
+6. Write a program to REVERSE internal content of every second word present in the given string:
+------------------------------------------------------------------------------------------------
+s='Learning python is very easy'
+l=s.split()
+print(l)
+l1=[]
+i=0
+while i<len(l):
+	if i%2==0:
+		l1.append(l[i])
+	else:
+		l1.append(l[i][::-1])
+	i=i+1
+output = ' '.join(l1)
+print(output)
+-----
+['Learning', 'python', 'is', 'very', 'easy']
+Learning nohtyp is yrev easy
+[Finished in 2.9s]
+
+7. Program: Print Characters present at even & odd index separately for the given string?
+-----------------------------------------------------------------------------------------
+s='Durgasoft'
+print('Characters present at Even Index:')
+i=0
+while i<len(s):
+	print(s[i])
+	i=i+2
+print('Characters print at Odd Index:')
+i=1
+while i<len(s):
+	print(s[i])
+	i=i+2
+-----------
+Characters present at Even Index:
+D
+r
+a
+o
+t
+Characters print at Odd Index:
+u
+g
+s
+f
+[Finished in 0.2s]
+
+
+s='Durgasoft'
+print('Characters present at Even Index:',s[::2])
+print('Characters print at Odd Index:',s[1::2])
+-----
+Characters present at Even Index: Draot
+Characters print at Odd Index: ugsf
+[Finished in 0.2s]
+
+8. Write a program to merge characters of 2 strings into a single string by taking characters alternatively
+------------------------------------------------------------------------------------------------------------
+s1='RAVI'
+s2='TEJA'
+i,j=0,0
+output=' '
+while i<len(s1) or j<len(s2):
+	output=output+s1[i]+s2[j]
+	i=i+1
+	j=j+1
+print(output)
+-----
+ RTAEVJIA
+[Finished in 0.2s]
+
+
+s1='RAVIKIRAN'
+s2='TEJA'
+i,j=0,0
+output=' '
+while i<len(s1) or j<len(s2):
+	if i<len(s1):
+		output=output+s1[i]
+		i=i+1
+	if j<len(s2):
+		output=output+s2[j]
+		j=j+1
+print(output)
+-----
+ RTAEVJIAKIRAN
+[Finished in 0.2s]
+
+
+9. Program to sort characters of the string,first alphabet symbols followed by digits:
+--------------------------------------------------------------------------------------
+input = B4A1D3
+output: ABD124
+
+s='B4A1D3'
+alphabets=[ ]
+digits=[ ]
+for ch in s:
+	if ch.isalpha():
+		alphabets.append(ch)
+	else:
+		digits.append(ch)
+output=''.join(sorted(alphabets)+sorted(digits))
+print(output)
+-----
+ABD134
+[Finished in 0.2s]
+
+
+10. Program for the requirement, input:a4b3c2 excepted output:aaaabbbcc:
+------------------------------------------------------------------------
+s='a4b3c2'
+output=''
+for ch in s:
+	if ch.isalpha():
+		x=ch
+	else:
+		d=int(ch)
+		output=output+x*d
+print(output)
+-----
+aaaabbbcc
+[Finished in 0.2s]
+
+11. program for the requirement, input: a3z2b4 and expected output:aaabbbbzz(sorted string):
+--------------------------------------------------------------------------------------------
+s='a4z2b4'
+output=''
+for ch in s:
+	if ch.isalpha():
+		x=ch
+	else:
+		d=int(ch)
+		output=output+x*d
+		target=''.join(sorted(output))
+print(target)
+------
+aaaabbbbzz
+[Finished in 0.1s]
+
+12. Program for the requirement, input:aaaabbbcccz and expeted output: 4a3b2c1z:
+--------------------------------------------------------------------------------
+s='aaaabbbccz'
+output=''
+previous=s[0]
+c=1
+i=1
+while i<len(s):
+	if s[i]==previous:
+		c=c+1
+	else:
+		output=output+str(c)+previous
+		previous=s[i]
+		c=1
+	if i==len(s)-1:
+		output=output+str(c)+previous
+	i=i+1
+print(output)
+-------
+4a3b2c1z
+[Finished in 0.1s]
+
+13. Program for the requirement,input a4k3b2 and expected output aeknbd:
+------------------------------------------------------------------------
+input : a4k3b2
+output : aeknbd
+
+print(ord('a'))
+print(chr(98))
+-------
+97
+b
+[Finished in 0.1s]
+
+s='a4k3b2'
+output=''
+for ch in s:
+	if ch.isalpha():
+		output=output+ch
+		x=ch
+	else:
+		d=int(ch)
+		newc=chr(ord(x)+d)
+		output=output+newc
+print(output)
+-------
+aeknbd
+[Finished in 0.1s]
+
+14. Program to remove duplicate characters from the gicen input string:
+-----------------------------------------------------------------------
+input: AZZBCDBBCDAABBCCCDEEEFFF
+output: ABCDEFZ
+
+1st way:
+--------
+s='ABBCCDDEEFFFFF'
+output=''
+for ch in s:
+	if ch not in output:
+		output=output+ch
+print(output)
+-----
+ABCDEF
+[Finished in 0.1s]
+
+2nd way:
+-------
+s='ABBCCDDEEFFFFFZZZZ'
+l=[]
+for ch in s:
+	if ch not in l:
+		l.append(ch)
+		output=''.join(l)
+print(output)
+---
+ABCDEFZ
+[Finished in 0.2s]
+
+3rd way:
+--------
+s='ABBCCDDEEFFFFFZZZZ'
+s1=set(s) 
+output=''.join(s1)
+print(output)
+----
+ZCFBEAD
+[Finished in 0.2s]
+
+15. Program to find the number of occurences of each character present in the given string with count() method:
+---------------------------------------------------------------------------------------------------------------
+s='ABBACBA'
+l=[ ]
+for ch in s:
+	if ch not in l:
+		l.append(ch)
+print(l)
+for ch in sorted(l):
+	print('{} occurs {} times'.format(ch,s.count(ch)))
+
+-------
+['A', 'B', 'C']
+A occurs 3 times
+B occurs 3 times
+C occurs 1 times
+[Finished in 0.2s]
+
+
+s='ABBACBAZZZYYY'
+s1=set(s)
+for ch in sorted(s1):
+	print('{} occurs {} times'.format(ch,s.count(ch)))
+-------
+A occurs 3 times
+B occurs 3 times
+C occurs 1 times
+Y occurs 3 times
+Z occurs 3 times
+[Finished in 0.1s]
+
+16. Important Conclusions about dictionary:
+-------------------------------------------
+d={}
+d['A']=100
+d['B']=200
+print(d)
+---
+{'A': 100, 'B': 200}
+[Finished in 0.2s]
+
+d={}
+d['A']=100
+d['B']=200
+d['A']=300
+print(d)
+print(d.get('A'))
+print(d.get('Z'))
+-----
+{'A': 300, 'B': 200}
+300
+None
+[Finished in 0.2s]
+
+d={}
+d['A']=100
+d['B']=200
+d['A']=300
+print(d)
+print(d.get('A',0))
+print(d.get('Z',0))
+------
+{'A': 300, 'B': 200}
+300
+0
+[Finished in 0.2s]
+
+d={}
+d['A']=100
+d['B']=200
+d['A']=d.get('A',0)+1
+print(d)
+print(d.get('A',0))
+print(d.get('Z',0)+1)
+----
+{'A': 101, 'B': 200}
+101
+1
+[Finished in 0.1s]
+
+d={'a':100,'z':200,'b':300}
+for k,v in sorted(d.items()):
+	print(k,v)
+------
+a 100
+b 300
+z 200
+[Finished in 0.1s]
+
+17. No.of occurences of each character present in given string without count():
+-------------------------------------------------------------------------------
+s='AAABBBBCCCDDFFFFAABB'
+d={}
+for ch in s:
+	d[ch]=d.get(ch,0)+1
+for k,v in sorted(d.items()):
+	print('{} occurs {} times'.format(k,v))
+-------------------------
+A occurs 5 times
+B occurs 6 times
+C occurs 3 times
+D occurs 2 times
+F occurs 4 times
+[Finished in 0.2s]
+
+18. Program for the requirement, input:ABAABBCA and expected output: 4A3B1C:
+----------------------------------------------------------------------------
+s='AAABBBBZZZCCCDDFFFFAABB'
+output=''
+d={}
+for ch in s:
+	d[ch]=d.get(ch,0)+1
+for k,v in sorted(d.items()):
+	output=output+str(v)+k
+print(output)
+----
+5A6B3C2D4F3Z
+[Finished in 0.1s]
+
+19. Program for the requirement, input: ABAABBCA and expected output:A4B3C1:
+----------------------------------------------------------------------------
+s='AAABBBBZZZCCCDDFFFFAABB'
+output=''
+d={}
+for ch in s:
+	d[ch]=d.get(ch,0)+1
+for k,v in sorted(d.items()):
+	output=output+k+str(v)
+print(output)
+-----
+A5B6C3D2F4Z3
+[Finished in 0.2s]
+
+20. Program to find the number of occurrences of each vowel present in the given string?
+----------------------------------------------------------------------------------------
+s='durgasoftware'
+v=['a','e','i','o','u','A','E','I','O','U']
+d={}
+for ch in s:
+	if ch in v:
+		d[ch]=d.get(ch,0)+1
+print(d)
+for k,v in sorted(d.items()):
+	print('{} occurs {} times'.format(k,v))
+----------
+{'u': 1, 'a': 2, 'o': 1, 'e': 1}
+a occurs 2 times
+e occurs 1 times
+o occurs 1 times
+u occurs 1 times
+[Finished in 0.2s]
+
+21. Program to check whether the given two strings are anagrams or not?
+-----------------------------------------------------------------------
+lazy = zaly
+LISTEN = SILENT
+TRIANGLE = INTEGRAL
+
+s1='lazy'
+s2='zaly'
+print(sorted(s1))
+print(sorted(s2))
+if sorted(s1) == sorted(s2):
+	print('Both strings are anagrams')
+else:
+	print('strings are not anagrams')
+---
+['a', 'l', 'y', 'z']
+['a', 'l', 'y', 'z']
+Both strings are anagrams
+[Finished in 0.2s]
+
+21. Program to check whether the given string is palindrome or not?:
+--------------------------------------------------------------------
+level, eye, malayalam
+
+s='level'
+if s==s[::-1]:
+	print('The given string is palindrome')
+else:
+	print('The given string is not palindrome')
+--------
+The given string is palindrome
+[Finished in 0.2s]
+
+22. Program to generate words from the given input strings by taking characters alternatively?:
+-----------------------------------------------------------------------------------------------
+input:
+s1='abcdefg'
+s2='xyz'
+s3='12345'
+output: ax1, by2, cz3,d4,e5,f,g
+
+if all are same length:
+----------------------
+s1='abcdefg'
+s2='xyz'
+s3='12345'
+i=j=k=0
+while i<len(s1) or j<len(s2) or k<len(s3):
+	output=s1[i]+s2[j]+s3[k]
+	print(output)
+	i=i+1
+	j=J+1
+	k=k+1
+----------
+ax1
+by2
+cz3
+[Finished in 0.2s]
+
+
+s1='abcdefg'
+s2='xyz'
+s3='12345'
+i=j=k=0
+while i<len(s1) or j<len(s2) or k<len(s3):
+	output=''
+	if i<len(s1):
+		output=output+s1[i]
+		i=i+1
+	if j<len(s2):
+		output=output+s2[j]
+		j=j+1
+	if k<len(s3):
+		output=output+s3[k]
+		k=k+1
+	print(output)
+	
+---------
+ax1
+by2
+cz3
+d4
+e5
+f
+g
+[Finished in 0.2s]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
