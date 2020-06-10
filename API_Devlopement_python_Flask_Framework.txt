@@ -1,0 +1,611 @@
+Introduction to RESTful API's:
+==============================
+- A Restful API is an application program interface - API.
+- It provide the communication between two parties over the network
+- RESTful APIs are developed using REST Rules.
+- REST Rules are set of rules to develop modern Web Applications to send and receive
+  data over the network
+- REST API is a web application and it has its own url.
+
+REST - Representational State Transfer:
+---------------------------------------
+- We have to know some concepts before understanding about what is REST?
+- GitHub API's
+	- https://api.github/users/AutomationWithScripting/repos
+- Client:
+ - The client is the pereson or software who uses the API.
+ - Here: curl/browser/program/script/any application
+- Resource:
+ - A resource can be any object that API can provide information about.
+ - Here: GitHub account repos
+
+Basic Concepts of RESTA APIs:
+=============================
+- Concepts:
+  - Base URL
+  - Endpoints
+  - Resource
+  - HTTP Verbs/Methods/Operations
+
+Base URL and Endpoints:
+----------------------
+http://dummy.restapiexample.com/
+
+http://dummy.restapiexample.com/api/v1/employees
+http://dummy.restapiexample.com/api/v1/employee/1
+http://dummy.restapiexample.com/api/v1/create
+http://dummy.restapiexample.com/api/v1/update/21
+http://dummy.restapiexample.com/api/v1/delete/2	
+
+- Base URL or Root Endpoint is  http://dummy.restapiexample.com
+- Remaining part are called Endpoints/Touts
+- They are:- /api/v1/employees
+	     /api/v1/employee/1	     
+
+- So REST API URL is BASE URL + ENDPOINT
+
+Resource and HTTP verbs:
+------------------------
+- Resource is simply a data in Web Application
+- Simply Endpoints are useful to work with Resources.
+- So, We have to execute different operations/methods on Endpoints based on requirement
+- Those methods/operations are called HTTP Verbs.
+- The different HTTP Verbsa are: GET,POST,PUT,PATCH and DELETE etc...
+- GET method is used to get a existing resource info/data from web application
+- POST method is to send a data to web application
+- PUT method is to update existing Resource in Web Application
+- DELETE methods is to delete resources in web application
+- Note: Most of the cases REST API's response is in the form of csv/json/xml and rarely test.
+
+C:\Users\Administrator\Desktop\pythonscripts>curl -X GET http://dummy.restapiexample.com/api/v1/employees
+
+{"status":"success","data":[{"id":"1","employee_name":"Tiger Nixon","employee_salary":"320800","employee_age":"61","profile_image":""},{"id":"2","employee_name":"Garrett Winters","employee_salary":"170750","employee_age":"63","profile_image":""},{"id":"3","employee_name":"Ashton Cox","employee_salary":"86000","employee_age":"66","profile_image":""},{"id":"4","employee_name":"Cedric Kelly","employee_salary":"433060","employee_age":"22","profile_image":""},{"id":"5","employee_name":"Airi Satou","employee_salary":"162700","employee_age":"33","profile_image":""},{"id":"6","employee_name":"Brielle Williamson","employee_salary":"372000","employee_age":"61","profile_image":""},{"id":"7","employee_name":"Herrod Chandler","employee_salary":"137500","employee_age":"59","profile_image":""},{"id":"8","employee_name":"Rhona Davidson","employee_salary":"327900","employee_age":"55","profile_image":""},{"id":"9","employee_name":"Colleen Hurst","employee_salary":"205500","employee_age":"39","profile_image":""},{"id":"10","employee_name":"Sonya Frost","employee_salary":"103600","employee_age":"23","profile_image":""},{"id":"11","employee_name":"Jena Gaines","employee_salary":"90560","employee_age":"30","profile_image":""},{"id":"12","employee_name":"Quinn Flynn","employee_salary":"342000","employee_age":"22","profile_image":""},{"id":"13","employee_name":"Charde Marshall","employee_salary":"470600","employee_age":"36","profile_image":""},{"id":"14","employee_name":"Haley Kennedy","employee_salary":"313500","employee_age":"43","profile_image":""},{"id":"15","employee_name":"Tatyana Fitzpatrick","employee_salary":"385750","employee_age":"19","profile_image":""},{"id":"16","employee_name":"Michael Silva","employee_salary":"198500","employee_age":"66","profile_image":""},{"id":"17","employee_name":"Paul Byrd","employee_salary":"725000","employee_age":"64","profile_image":""},{"id":"18","employee_name":"Gloria Little","employee_salary":"237500","employee_age":"59","profile_image":""},{"id":"19","employee_name":"Bradley Greer","employee_salary":"132000","employee_age":"41","profile_image":""},{"id":"20","employee_name":"Dai Rios","employee_salary":"217500","employee_age":"35","profile_image":""},{"id":"21","employee_name":"Jenette Caldwell","employee_salary":"345000","employee_age":"30","profile_image":""},{"id":"22","employee_name":"Yuri Berry","employee_salary":"675000","employee_age":"40","profile_image":""},{"id":"23","employee_name":"Caesar Vance","employee_salary":"106450","employee_age":"21","profile_image":""},{"id":"24","employee_name":"Doris Wilder","employee_salary":"85600","employee_age":"23","profile_image":""}]}
+
+HTTP Status Codes:
+==================
+- HTTP Status code represents the status of a request on REST APIs
+- search 
+	github rest api list
+- We can get the HTTP Status Code from the header of a response.
+- The Status-Code is a 3-digit integer where the first digit of the Status-Code defines
+  the class of response and the last two digits do not have any categorization role.
+
+	https://www.restapitutorial.com/httpstatuscodes.html
+
+C:\Users\Administrator\Desktop\pythonscripts>curl -X GET https://api.github.com/users/AutomationWithScripting
+ 
+C:\Users\Administrator\Desktop\pythonscripts>curl -i -X GET https://api.github.com/users/AutomationWithScripting
+
+C:\Users\Administrator\Desktop\pythonscripts>curl -i -X GET https://api.github.com/users/AutomationWithScriptingdsf
+HTTP/1.1 404 Not Found
+date: Tue, 02 Jun 2020 11:36:58 GMT
+content-type: application/json; charset=utf-8
+
+Tools to Call REST APIs:
+========================
+- We can call/consume/execute REST API's using:
+	- Command line tools(curl command)
+	- GUI Tools(Postman,Apigee,Swagger,JMeter etc...)
+	- Programming/Scripting Languages (Python,Java, NodeJS etc....)
+
+
+First Python Flask REST API Application:
+========================================
+- Design REST API for an Employee info?
+- Steps to Implement REST API:
+     - Base URL/Root Endpoint (Where your REST API is running)
+	 - http://localhost:5000
+     - Endpoints:
+	 - /info
+     - Resource: Employee Information
+     - HTTP Verbs/Methods:
+	 - GET
+- Now our REST APIs are: Base URL + Endpoints
+     - http://localhost:5000/info
+     - and available Method is only GET
+
+Environment Setup to implement Python Flask REST APIs:
+======================================================
+- Python Flask REST API Development needs:
+	- Flask
+	- Flask_restful framework
+- Flask is a web framework. This means flask provides you with tools, libraries and 
+  technologies that allow you to build a web application.
+- Flask-RESTful is an extension for Flask that adds suppot for quickly building
+  REST API's
+- Flask-RESTful encourages best practives with minimal setup
+
+C:\Users\Administrator\Desktop\pythonscripts>pip install flask
+C:\Users\Administrator\Desktop\pythonscripts>pip install flask_restful
+
+from flask import Flask
+from flask_restful import Resource, Api
+
+app=Flask(__name__)
+api=Api(app)
+
+employee_info = {
+	"emp1": {
+	"name": "xyz",
+	"salary": "10L"
+	},
+	"emp2": {
+	"name": "abc",
+	"salary": "14L"
+	}
+}
+
+class Employee(Resource):
+	def get(self):
+		return employee_info
+
+api.add_resource(Employee,"/info")
+app.run(port=5000,host="localhost")
+---------
+ * Serving Flask app "app" (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+ * Running on http://localhost:5000/ (Press CTRL+C to quit)
+8127.0.0.1 - - [03/Jun/2020 09:56:35] "[33mGET / HTTP/1.1[0m" 404 -
+127.0.0.1 - - [03/Jun/2020 09:56:35] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [03/Jun/2020 09:56:44] "[37mGET /info HTTP/1.1[0m" 200 -
+
+Executing/Testing implemented REST APIs using 
+=============================================
+curl command and Python requests module:
+========================================
+C:\Users\Administrator\Desktop\pythonscripts>curl -X GET http://localhost:5000/
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<title>404 Not Found</title>
+<h1>Not Found</h1>
+<p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
+
+C:\Users\Administrator\Desktop\pythonscripts>curl -X GET http://localhost:5000/info
+{"emp1": {"name": "xyz", "salary": "10L"}, "emp2": {"name": "abc", "salary": "14L"}}
+
+C:\Users\Administrator\Desktop\pythonscripts>curl -i -X GET http://localhost:5000/info
+HTTP/1.0 200 OK
+Content-Type: application/json
+Content-Length: 85
+Server: Werkzeug/1.0.1 Python/3.7.7
+Date: Wed, 03 Jun 2020 10:11:38 GMT
+
+{"emp1": {"name": "xyz", "salary": "10L"}, "emp2": {"name": "abc", "salary": "14L"}}
+
+C:\Users\Administrator\Desktop\pythonscripts>curl -i -X POST http://localhost:5000/info
+HTTP/1.0 405 METHOD NOT ALLOWED
+Content-Type: application/json
+Content-Length: 64
+Allow: HEAD, GET, OPTIONS
+Server: Werkzeug/1.0.1 Python/3.7.7
+Date: Wed, 03 Jun 2020 10:11:56 GMT
+
+
+C:\Users\Administrator\Desktop\pythonscripts>pip install requests
+
+C:\Users\Administrator\Desktop\pythonscripts>vim simple.py
+
+import requests
+
+response=requests.get("http://localhost:5000/info")
+print(response.status_code)
+print(response.text)
+~
+~
+C:\Users\Administrator\Desktop\pythonscripts>py simple.py
+200
+{"emp1": {"name": "xyz", "salary": "10L"}, "emp2": {"name": "abc", "salary": "14L"}}
+
+
+import requests
+
+response=requests.post("http://localhost:5000/info")
+print(response.status_code)
+print(response.text)
+
+C:\Users\Administrator\Desktop\pythonscripts>py simple.py
+405
+{"message": "The method is not allowed for the requested URL."}
+
+
+Executing/Testing impleted REST APIs using Postman Tool:
+========================================================
+https://www.postman.com/downloads/
+
+Adding Help and Status Endpoints for REST API:
+==============================================
+from flask import Flask
+from flask_restful import Resource, Api
+
+app=Flask(__name__)
+api=Api(app)
+
+class Help(Resource):
+	def get(self):
+		help={
+		"Available REST APIs are": ["/ping","/info"]
+		}
+		return help
+	
+
+class Ping(Resource):
+	def get(self):
+		status={
+		"status": "Alive"
+		}
+		return status
+
+
+class Employee(Resource):
+	def get(self):
+		employee_info = {
+		"emp1": {
+		"name": "xyz",
+		"salary": "10L"
+		},
+		"emp2": {
+		"name": "abc",
+		"salary": "14L"
+		}
+		}
+		return employee_info
+api.add_resource(Help,"/")
+api.add_resource(Ping,"/Ping")
+api.add_resource(Employee,"/info")
+app.run(port=5000,host="localhost")
+
+-------
+
+C:\Users\Administrator\Desktop\pythonscripts>curl -i -X GET http://localhost:5000/Ping
+HTTP/1.0 200 OK
+Content-Type: application/json
+Content-Length: 20
+Server: Werkzeug/1.0.1 Python/3.7.7
+Date: Thu, 04 Jun 2020 09:16:30 GMT
+
+{"status": "Alive"}
+
+C:\Users\Administrator\Desktop\pythonscripts>curl -i -X GET http://localhost:5000/info
+HTTP/1.0 200 OK
+Content-Type: application/json
+Content-Length: 85
+Server: Werkzeug/1.0.1 Python/3.7.7
+Date: Thu, 04 Jun 2020 09:17:00 GMT
+
+{"emp1": {"name": "xyz", "salary": "10L"}, "emp2": {"name": "abc", "salary": "14L"}}
+
+
+REST APIs with Variables in Emdpoints:
+======================================
+- Design REST APIs to get employees info and also to get a particular employe info
+----------------------------------------------------------------------------------
+steps:
+-----
+1. Baseurl: http://hostname:port/
+2. Endpoints:
+	/esinfo
+	/einfo/<string:ename>
+3. Resource: employees_info
+4. HTTP Verbs
+	GET
+
+
+from flask import Flask
+from flask_restful import Resource, Api
+
+app=Flask(__name__)
+api=Api(app)
+
+employees_info = {
+		"xyz": {
+		"Tech": "Linux",
+		"salary": "10L"
+		},
+		"abc": {
+		"Tech": "Dev",
+		"salary": "14L"
+		}
+	}
+
+class Help(Resource):
+	def get(self):
+		help={
+		"All Endpoints": ["/api/v1/esinfo","/api/v1/einfo/:ename"]
+		}
+		return help
+
+class Employees(Resource):
+	def get(self):
+		return employees_info
+
+
+class Employee(Resource):
+	def get(self,ename=None):
+		if ename:
+			if ename in employees_info.keys():
+				return employees_info.get(ename)
+			else:
+				message={
+				"message": "Sorry employee is not found in my list"
+				}
+				return message
+		else:
+			return employees_info
+
+
+api.add_resource(Help,"/")
+api.add_resource(Employees,"/api/v1/esinfo")
+api.add_resource(Employee,"/api/v1/einfo/<string:ename>")
+
+app.run(port=5000,host="localhost")
+---------------------
+C:\Users\Administrator\Desktop\pythonscripts>curl -X GET http://localhost:5000/
+{"All Endpoints": ["/esinfo", "/einfo/:ename"]}
+
+C:\Users\Administrator\Desktop\pythonscripts>curl -X GET http://localhost:5000/esinfo
+{"xyz": {"Tech": "Linux", "salary": "10L"}, "abc": {"Tech": "Dev", "salary": "14L"}}
+
+C:\Users\Administrator\Desktop\pythonscripts>curl -X GET http://localhost:5000/einfo/abc
+{"Tech": "Dev", "salary": "14L"}
+
+C:\Users\Administrator\Desktop\pythonscripts>curl -X GET http://localhost:5000/einfo/xyz
+{"Tech": "Linux", "salary": "10L"}
+
+C:\Users\Administrator\Desktop\pythonscripts>curl -X GET http://localhost:5000/einfo/abcx
+{"message": "Sorry employee is not found in my list"}
+
+What is Werkzeug? Debug mode on and off:
+========================================
+from flask import Flask
+from flask_restful import Resource, Api
+
+app=Flask(__name__)
+api=Api(app)
+
+employees_info = {
+		"xyz": {
+		"Tech": "Linux",
+		"salary": "10L"
+		},
+		"abc": {
+		"Tech": "Dev",
+		"salary": "13L"
+		}
+	}
+
+class Help(Resource):
+	def get(self):
+		help={
+		"All Endpoints": ["/api/v1/esinfo","/api/v1/einfo/:ename"]
+		}
+		return help
+
+class Employees(Resource):
+	def get(self):
+		return employees_info
+
+
+class Employee(Resource):
+	def get(self,ename=None):
+		if ename:
+			if ename in employees_info.keys():
+				return employees_info.get(ename)
+			else:
+				message={
+				"message": "Sorry employee is not found in my list"
+				}
+				return message
+		else:
+			return employees_info
+
+
+api.add_resource(Help,"/")
+api.add_resource(Employees,"/api/v1/esinfo")
+api.add_resource(Employee,"/api/v1/einfo/<string:ename>")
+
+app.run(debug=True,port=5000,host="localhost")
+------
+ * Serving Flask app "app" (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 556-360-451
+ * Running on http://localhost:5000/ (Press CTRL+C to quit)
+
+Customizing the Response with Required HTTP Status Code and Sending Response as json data:
+==========================================================================================
+make_response and jsonify:
+--------------------------
+from flask import Flask, make_response, jsonify
+from flask_restful import Resource, Api
+
+app=Flask(__name__)
+api=Api(app)
+
+employees_info = {
+		"xyz": {
+		"Tech": "Linux",
+		"salary": "10L"
+		},
+		"abc": {
+		"Tech": "Dev",
+		"salary": "13L"
+		}
+	}
+
+class Help(Resource):
+	def get(self):
+		help={
+		"All Endpoints": ["/esinfo","/einfo/:ename"]
+		}
+		return help
+'''
+class Employees(Resource):
+	def get(self,ename=None):
+		return employees_info
+'''
+
+class Employees(Resource):
+	def get(self,ename=None):
+		if ename:
+			if ename in employees_info.keys():
+				return make_response(jsonify(employees_info.get(ename)),200)
+			else:
+				message={
+				"message": "Sorry employee is not found in my list"
+				}
+			return make_response(jsonify(message),404)
+		else:
+			return make_response(jsonify(employees_info),200)
+
+
+api.add_resource(Help,"/")
+api.add_resource(Employees, "/esinfo","/esinfo/<string:ename>")
+#api.add_resource(Employee,"/einfo/<string:ename>")
+
+app.run(debug=True,port=5000,host="localhost")
+
+--------------------------
+C:\Users\Administrator\Desktop\pythonscripts>curl -i -X GET http://localhost:5000/esinfo/john
+HTTP/1.0 404 NOT FOUND
+Content-Type: application/json
+Content-Length: 58
+Server: Werkzeug/1.0.1 Python/3.7.7
+Date: Thu, 04 Jun 2020 11:58:14 GMT
+
+{
+  "message": "Sorry employee is not found in my list"
+}
+
+C:\Users\Administrator\Desktop\pythonscripts>curl -i -X GET http://localhost:5000/esinfo/abc
+HTTP/1.0 200 OK
+Content-Type: application/json
+Content-Length: 40
+Server: Werkzeug/1.0.1 Python/3.7.7
+Date: Thu, 04 Jun 2020 11:58:49 GMT
+
+{
+  "Tech": "Dev",
+  "salary": "13L"
+}
+
+What is request object in flask module or framework?:
+=====================================================
+- The request object contains all the data that is sent from the client to the server
+
+C:\Users\Administrator\Desktop\pythonscripts>curl -X GET http://localhost:5000/esinfo?id=4 -u username:passwd
+
+from flask import Flask, make_response, jsonify, request
+from flask_restful import Resource, Api
+
+app=Flask(__name__)
+api=Api(app)
+
+class Info(Resource):
+	def __init__(self):
+		#print(dir(request))
+		print(request.authorization)
+	def get(self):
+		print("get method is executed")
+		pass
+	def post(Resource):
+		pass
+
+api.add_resource(Info,"/info")
+
+app.run(debug=True,port=5000,host="localhost")
+----
+C:\Users\Administrator\Desktop\pythonscripts>curl -X POST http://localhost:5000/info
+null
+
+How to pass parameters (variables) to the destination URL/Endpoint as a query parameter?
+========================================================================================
+- http://yourapi.com/esinfo?ename=abc
+- "http://yourapi.com/esinfo?ename=abc&id=2"
+
+from flask import Flask, make_response, jsonify, request
+from flask_restful import Resource, Api
+
+app=Flask(__name__)
+api=Api(app)
+
+employees_info = {
+		"xyz": {
+		"Tech": "Linux",
+		"salary": "10L"
+		},
+		"abc": {
+		"Tech": "Dev",
+		"salary": "13L"
+		}
+	}
+class Help(Resource):
+	def get(self):
+		help={
+		"All Endpoints": ["/esinfo"]
+		}
+		return help
+class Employees(Resource):
+	def get(self):
+		if request.args:
+			if "ename" not in request.args.keys():
+				message={
+				"message": "use only ename as query parameter",
+				"help": "/esinfo?ename=<your_emp_name>"
+				}
+				return message
+			emp_name=request.args.get("ename")
+			if emp_name in employees_info.keys():
+				return employees_info.get(emp_name)
+			message={
+			"message": "sorry, we do not find given emp name in out list"
+
+			}	
+			return message
+		return employees_info
+
+
+api.add_resource(Help,"/")
+api.add_resource(Employees,"/esinfo")
+#api.add_resource(Employee,"/api/v1/einfo/<string:ename>")
+
+app.run(debug=True,port=5000,host="localhost")
+--------------
+C:\Users\Administrator\Desktop\pythonscripts>curl -X GET http://localhost:5000/esinfo?ename=abc
+{
+    "Tech": "Dev",
+    "salary": "13L"
+}
+
+C:\Users\Administrator\Desktop\pythonscripts>curl -X GET http://localhost:5000/esinfo?ename=abccde
+{
+    "message": "sorry, we do not find given emp name in out list"
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

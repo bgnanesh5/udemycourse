@@ -1,0 +1,25 @@
+In AD each object have a Globally Unique Identifier (GUID)
+CTC.COM
+
+Install DNS using PowerShell:
+-----------------------------
+PS C:\Users\Administrator> Get-WindowsFeature
+PS C:\Users\Administrator> Add-WindowsFeature -name DNS -IncludeManagementTools
+PS C:\Users\Administrator> Add-WindowsFeature -name DNS -IncludeManagementTools
+WARNING: The following recommended condition is not met for DNS: No static IP addresses were found on this computer. If
+ the IP address changes, clients might not be able to contact this server. Please configure a static IP address on this
+ computer before installing DNS Server.
+
+Success Restart Needed Exit Code      Feature Result
+------- -------------- ---------      --------------
+True    No             Success        {DNS Server, Remote Server Administration ...
+
+- A Domain is known as a logical group of network objects such as users, computers,
+devices that share same.
+
+PS C:\Users\Administrator> Get-WindowsFeature *AD-Domain-Services*
+
+Display Name                          Name                       Install State
+------------                          ----                       -------------
+[ ] Active Directory Domain Services  AD-Domain-Services             Available
+
