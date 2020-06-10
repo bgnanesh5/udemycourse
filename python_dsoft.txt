@@ -3156,7 +3156,7 @@ s3='12345'
 output: ax1, by2, cz3,d4,e5,f,g
 
 if all are same length:
-----------------------
+-----------------------
 s1='abcdefg'
 s2='xyz'
 s3='12345'
